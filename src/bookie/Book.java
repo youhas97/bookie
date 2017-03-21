@@ -1,6 +1,9 @@
 package bookie;
 
-public class Book {
-    private static Calendar cal;
-    private static User user;
+public final class Book {
+    private Book() {}
+
+    public static void bookAppointment(Calendar cal, Month month, int date) {
+        
+    }
 }
