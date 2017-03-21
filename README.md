@@ -1,7 +1,11 @@
 Command line instructions
 
 
+
+
 Git global setup
+
+
 
 git config --global user.name "Yousef Hashem"
 git config --global user.email "youha847@student.liu.se"
@@ -21,7 +25,10 @@ git commit -m "add README"
 git push -u origin master
 
 
+
+
 Existing folder
+
 
 cd existing_folder
 
@@ -36,7 +43,10 @@ git commit
 git push -u origin master
 
 
+
+
 Existing Git repository
+
 
 cd existing_repo
 
