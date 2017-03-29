@@ -21,8 +21,8 @@ public class Calendar {
 	    System.out.println(app);
 	}
     }
-    public void book(final LocalDate date, final LocalTime startTime,
-		     final LocalTime endTime, final Appointment app) {
+    public void book(final LocalDate date, final LocalTime startTime, final LocalTime endTime, final String subject) {
 
+	appointments.add(new Appointment(date, startTime, endTime, subject));
     }
 }
