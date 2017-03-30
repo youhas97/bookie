@@ -60,6 +60,10 @@ public class CalendarFrame extends JFrame
 	    minutes.addItem(time);
 	}
 
+	for (User user : User.getExistingUsers()) {
+	    users.addItem(user);
+	}
+
 	bookAppointment.addActionListener(new ActionListener()
 	{
 	    // Creates a new actionlistener on the spot instead of implementing the whole interface.
