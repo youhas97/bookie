@@ -21,8 +21,14 @@ public class Calendar {
 	    System.out.println(app);
 	}
     }
-    public void book(final LocalDate date, final LocalTime startTime, final LocalTime endTime, final String subject) {
 
+    public void book(final LocalDate date, final LocalTime startTime, final LocalTime endTime, final String subject) {
+	if (startTime.isAfter(endTime)) {
+	    throw new IllegalArgumentException("Start time must preceed end time.");
+	}
+	if (LocalDate.now().isAfter(date)) {
+	    throw new IllegalArgumentException("Cannot book past date.");
+	}
 	appointments.add(new Appointment(date, startTime, endTime, subject));
     }
 }

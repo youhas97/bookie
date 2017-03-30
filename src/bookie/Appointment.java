@@ -57,7 +57,7 @@ public class Appointment {
     }
 
     @Override public String toString() {
-	return date.getMonth() + " " + date.getDayOfMonth() + " (" + date.getDayOfWeek() + ")" + ", " + date.getYear() + ": " +
+	return date.getMonth() + " " + date.getDayOfMonth() + ", " + date.getYear() + " (" + date.getDayOfWeek() + ")" + ": " +
 	       subject + " (" + this.getTimeSpan() + ")";
     }
 }
