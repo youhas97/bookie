@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calendar {
+    private static final int HOURS_PER_DAY = 24;
+    private static final int MINUTES_PER_HOUR = 60;
+
     private User user;
     private String name;
     private List<Appointment> appointments;
@@ -26,9 +29,43 @@ public class Calendar {
 	if (startTime.isAfter(endTime)) {
 	    throw new IllegalArgumentException("Start time must preceed end time.");
 	}
-	if (LocalDate.now().isAfter(date)) {
+	if (date.isBefore(LocalDate.now())) {
 	    throw new IllegalArgumentException("Cannot book past date.");
 	}
+
+	/*
+	Checks every time between this appointment's starttime and endtime
+	and compares to every other appointment's starttime and endtime.
+	 */
+	for (int hour = startTime.getHour(); hour <= endTime.getHour(); hour++) {
+	    for (int minute = 0; minute < MINUTES_PER_HOUR; minute++) {
+		if ((LocalTime.of(hour, minute).isAfter(startTime) && LocalTime.of(hour, minute).isBefore(endTime)) &&
+		    overlapsBooking(LocalTime.of(hour, minute), date, appointments)) {
+		    throw new IllegalArgumentException("Time is already booked");
+		}
+	    }
+	}
+
 	appointments.add(new Appointment(date, startTime, endTime, subject));
+
+    }
+
+    private boolean isTimeInSpan(LocalTime time, LocalTime spanStart, LocalTime spanEnd) {
+	if (time.isAfter(spanStart) && time.isBefore(spanEnd)) {
+	    return true;
+	}
+	return false;
+    }
+
+    /*
+    check for closest comparable time and only check that to optimize program.
+     */
+    private boolean overlapsBooking(LocalTime time, LocalDate date, List<Appointment> appointments) {
+	for (Appointment app : appointments) {
+	    if (isTimeInSpan(time, app.getStartTime(), app.getEndTime()) && app.getDate().compareTo(date) == 0) {
+		return true;
+	    }
+	}
+	return false;
     }
 }

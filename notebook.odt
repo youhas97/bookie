@@ -1,0 +1,5 @@
+﻿Dilemma 1: Designproblem – vilken layout ska användas?:
+	- SpringLayout – mer flexibilitet, svårare att hantera.
+	- GridBagLayout – mindre flexibilitet, lättare att använda.
+	- MigLayout – finns i föreläsningsanteckningar.
+valde MigLayout för det finns I föreläsningsanteckningar
