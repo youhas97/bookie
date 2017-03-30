@@ -4,10 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.time.Month;
+import java.time.Year;
 
 public class CalendarFrame extends JFrame
 {
+    private static final int HOURS_PER_DAY = 24;
+    private static final int MINUTES_PER_HOUR = 60;
+
     private JMenuItem quit;
     private JLabel currentUser;
     private JPanel infoPanel;
@@ -16,10 +21,9 @@ public class CalendarFrame extends JFrame
     private JMenu fileMenu, systemMenu;
     private JFrame popUpFrame;
 
-    private JComboBox<Integer> days, startTimes, endTimes, years;
+    private JComboBox<Integer> days, years, hours, minutes;
     private JComboBox<User> users;
     private JComboBox<Month> months;
-
 
     public CalendarFrame() {
 
@@ -36,6 +40,25 @@ public class CalendarFrame extends JFrame
 	fileMenu.add(bookAppointment);
 	systemMenu.add(quit);
 	infoPanel.add(currentUser, BorderLayout.WEST);
+
+	for (Month month : Month.values()) {
+	    months.addItem(month);
+	}
+
+	for (int day = 1; day <= 31; day++) {
+	    days.addItem(day);
+	}
+
+	for (int year = Year.now().getValue(); year <= Year.now().getValue() + 2; year++) {
+	    years.addItem(year);
+	}
+
+	for (int time = 0; time < MINUTES_PER_HOUR; time++) {
+	    if (time < HOURS_PER_DAY) {
+		hours.addItem(time);
+	    }
+	    minutes.addItem(time);
+	}
 
 	bookAppointment.addActionListener(new ActionListener()
 	{
@@ -67,8 +90,5 @@ public class CalendarFrame extends JFrame
 	this.setVisible(true);
 
 	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-
-
     }
 }

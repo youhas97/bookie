@@ -22,10 +22,9 @@ public class Appointment {
 	LocalTime time = LocalTime.of(14,00);
 	LocalTime time2 = LocalTime.of(16, 00);
 	LocalDate date = LocalDate.of(2017, 03, 29);
-	Appointment app = new Appointment(date, time, time2, "ADOLF HITLER");
+	Appointment app = new Appointment(date, time, time2, "bästa bulle på java");
 	System.out.println(time);
 	System.out.println(app.getTimeSpan());
-	System.out.println(date.getMonth());
 	System.out.println(app);
     }
 
