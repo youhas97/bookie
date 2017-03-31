@@ -8,7 +8,8 @@ public class Main {
 	User abdi = new User("Abdi");
 	Calendar cal = new Calendar(abdi, "AbdiCal");
 	cal.book(LocalDate.of(2017, 04, 01), LocalTime.of(16, 04), LocalTime.of(18, 31), "Fika med Ahmed");
-	cal.book(LocalDate.of(2017, 04, 01), LocalTime.of(15, 00), LocalTime.of(16, 04), "Fika med Ahmed");
 	cal.show();
+
+	CalendarFrame calFrame = new CalendarFrame();
     }
 }

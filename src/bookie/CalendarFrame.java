@@ -19,13 +19,16 @@ public class CalendarFrame extends JFrame
     private JMenuItem bookAppointment;
     private JMenuBar menuBar;
     private JMenu fileMenu, systemMenu;
-    private JFrame popUpFrame;
+    private JFrame popUpFrame = new JFrame();
 
     private JComboBox<Integer> days, years, hours, minutes;
     private JComboBox<User> users;
     private JComboBox<Month> months;
 
     public CalendarFrame() {
+	/*
+        A template for popup windows
+         */
 
 	quit = new JMenuItem("Quit");
 	bookAppointment = new JMenuItem("Book");
@@ -34,6 +37,13 @@ public class CalendarFrame extends JFrame
 	menuBar = new JMenuBar();
 	fileMenu = new JMenu("File");
 	systemMenu = new JMenu("System");
+
+	months = new JComboBox<>();
+	users = new JComboBox<>();
+	days = new JComboBox<>();
+	years = new JComboBox<>();
+	hours = new JComboBox<>();
+	minutes = new JComboBox<>();
 
 	menuBar.add(fileMenu);
 	menuBar.add(systemMenu);
@@ -68,7 +78,14 @@ public class CalendarFrame extends JFrame
 	{
 	    // Creates a new actionlistener on the spot instead of implementing the whole interface.
 	    @Override public void actionPerformed(final ActionEvent e) {
-
+		CalendarFrame bookFrame = new CalendarFrame();
+		JPanel bookWindow = new JPanel();
+		bookWindow.add(days);
+		bookWindow.add(months);
+		bookWindow.add(years);
+		bookWindow.add(hours);
+		bookWindow.add(minutes);
+		bookFrame.add(bookWindow);
 	    }
 	});
 
