@@ -1,10 +1,10 @@
 package bookie;
 
+import net.miginfocom.swing.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalTime;
 import java.time.Month;
 import java.time.Year;
 
@@ -12,17 +12,11 @@ public class CalendarFrame extends JFrame
 {
     private static final int HOURS_PER_DAY = 24;
     private static final int MINUTES_PER_HOUR = 60;
+    private static final int MAX_MONTH_DAYS = 31;
 
     private JMenuItem quit;
-    private JLabel currentUser;
-    private JPanel infoPanel;
-    private JMenuItem bookAppointment;
-    private JMenuBar menuBar;
-    private JMenu fileMenu, systemMenu;
-    private JFrame popUpFrame = new JFrame();
 
     private JComboBox<Integer> days, years, hours, minutes;
-    private JComboBox<User> users;
     private JComboBox<Month> months;
 
     public CalendarFrame() {
@@ -31,15 +25,16 @@ public class CalendarFrame extends JFrame
          */
 
 	quit = new JMenuItem("Quit");
-	bookAppointment = new JMenuItem("Book");
-	currentUser = new JLabel("Current user: Hashem²");
-	infoPanel = new JPanel();
-	menuBar = new JMenuBar();
-	fileMenu = new JMenu("File");
-	systemMenu = new JMenu("System");
+	final JMenuItem bookAppointment = new JMenuItem("Book");
+	final JMenuItem changeUser = new JMenuItem("Change user");
+	final JLabel currentUser = new JLabel("Current user: Hashem");
+	final JPanel infoPanel = new JPanel();
+	final JMenuBar menuBar = new JMenuBar();
+	final JMenu fileMenu = new JMenu("File");
+	final JMenu systemMenu = new JMenu("System");
 
 	months = new JComboBox<>();
-	users = new JComboBox<>();
+	final JComboBox<User> users = new JComboBox<>();
 	days = new JComboBox<>();
 	years = new JComboBox<>();
 	hours = new JComboBox<>();
@@ -48,14 +43,15 @@ public class CalendarFrame extends JFrame
 	menuBar.add(fileMenu);
 	menuBar.add(systemMenu);
 	fileMenu.add(bookAppointment);
+	fileMenu.add(changeUser);
 	systemMenu.add(quit);
-	infoPanel.add(currentUser, BorderLayout.WEST);
+	infoPanel.add(currentUser, "west");
 
 	for (Month month : Month.values()) {
 	    months.addItem(month);
 	}
 
-	for (int day = 1; day <= 31; day++) {
+	for (int day = 1; day <= MAX_MONTH_DAYS; day++) {
 	    days.addItem(day);
 	}
 
@@ -74,42 +70,50 @@ public class CalendarFrame extends JFrame
 	    users.addItem(user);
 	}
 
-	bookAppointment.addActionListener(new ActionListener()
-	{
-	    // Creates a new actionlistener on the spot instead of implementing the whole interface.
-	    @Override public void actionPerformed(final ActionEvent e) {
-		CalendarFrame bookFrame = new CalendarFrame();
-		JPanel bookWindow = new JPanel();
-		bookWindow.add(days);
-		bookWindow.add(months);
-		bookWindow.add(years);
-		bookWindow.add(hours);
-		bookWindow.add(minutes);
-		bookFrame.add(bookWindow);
-	    }
-	});
+	bookAppointment.addActionListener(new PopUpAction());
 
-	quit.addActionListener(new ActionListener()
-	{
-	    // Creates a new actionlistener on the spot instead of implementing the whole interface.
-	    @Override public void actionPerformed(final ActionEvent e) {
-		if (JOptionPane
-			    .showConfirmDialog(quit, "Are you sure you want to quit?", "WARNING", JOptionPane.YES_NO_OPTION) ==
-		    JOptionPane.YES_OPTION) {
-		    // yes option
-		    System.exit(0);
-		}
-	    }
-	});
-
-	this.setLayout(new BorderLayout());
-	infoPanel.setLayout(new BorderLayout());
-	this.add(menuBar, BorderLayout.NORTH);
-	this.add(infoPanel, BorderLayout.SOUTH);
+	quit.addActionListener(new QuitAction());
+	this.setLayout(new MigLayout());
+	infoPanel.setLayout(new MigLayout());
+	this.add(menuBar, "west");
+	this.add(infoPanel, "south");
 
 	this.pack();
 	this.setVisible(true);
 
-	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	//Positions the frame in the middle of the monitor
+	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    final private class PopUpAction implements ActionListener
+    {
+	//if source is book.
+	@Override public void actionPerformed(final ActionEvent e) {
+	    final JFrame popUpFrame = new JFrame();
+	    popUpFrame.setLayout(new MigLayout());
+	    popUpFrame.add(days);
+	    popUpFrame.add(months);
+	    popUpFrame.add(years);
+	    popUpFrame.add(hours);
+	    popUpFrame.add(minutes);
+	    popUpFrame.setVisible(true);
+	    popUpFrame.pack();
+	}
+	//if source is change user {...}
+    }
+
+    final private class QuitAction implements ActionListener
+    {
+
+	@Override public void actionPerformed(final ActionEvent e) {
+	    if (JOptionPane.showConfirmDialog(quit, "Are you sure you want to quit?", "WARNING", JOptionPane.YES_NO_OPTION) ==
+		JOptionPane.YES_OPTION) {
+		// yes option
+		System.exit(0);
+	    }
+	}
     }
 }

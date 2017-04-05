@@ -1326,6 +1326,16 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
   </component>
+  <component name="libraryTable">
+    <library name="miglayout-core-5.1-20170404.220012-733">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/libraries/miglayout-core-5.1-20170404.220012-733.jar!/" />
+        <root url="jar://$PROJECT_DIR$/libraries/miglayout-swing-5.1-20170404.220021-733.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
   <component name="masterDetails">
     <states>
       <state key="Copyright.UI">

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/project"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="miglayout-swing-5.1-20170404.220021-733.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/miglayout-swing-5.1-20170404.220021-733.jar!/"/>
+	</lib>
+</component>
