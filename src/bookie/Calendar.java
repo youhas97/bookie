@@ -1,5 +1,7 @@
 package bookie;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -71,5 +73,12 @@ public class Calendar {
 	    }
 	}
 	return false;
+    }
+
+    final private class BookAction implements ActionListener
+    {
+
+	@Override public void actionPerformed(final ActionEvent e) {
+	}
     }
 }

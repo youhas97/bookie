@@ -3,3 +3,8 @@
 	- GridBagLayout – mindre flexibilitet, lättare att använda.
 	- MigLayout – finns i föreläsningsanteckningar.
 valde MigLayout för det finns I föreläsningsanteckningar
+
+Dilemma 2: Skapa en basframe eller skapa 50000000000 actions och mappa?
+	-Basframe - mindre arbete, svårare implementation
+	-Många actions – mer arbete, lättare implementation
+calde Basframe, mer optimerat, färre rader kod.

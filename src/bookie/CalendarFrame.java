@@ -14,17 +14,16 @@ public class CalendarFrame extends JFrame
     private static final int MINUTES_PER_HOUR = 60;
     private static final int MAX_MONTH_DAYS = 31;
 
-    private JMenuItem quit;
+    private JDialog popUp;
+    private final JButton confirmBooking = new JButton("Book");
+    private final JButton cancelBooking = new JButton("Cancel");
 
-    private JComboBox<Integer> days, years, hours, minutes;
-    private JComboBox<Month> months;
+    protected JComboBox<Integer> days, years, hours, minutes;
+    protected JComboBox<Month> months;
 
     public CalendarFrame() {
-	/*
-        A template for popup windows
-         */
 
-	quit = new JMenuItem("Quit");
+	popUp = new JDialog(this, true);
 	final JMenuItem bookAppointment = new JMenuItem("Book");
 	final JMenuItem changeUser = new JMenuItem("Change user");
 	final JLabel currentUser = new JLabel("Current user: Hashem");
@@ -32,6 +31,7 @@ public class CalendarFrame extends JFrame
 	final JMenuBar menuBar = new JMenuBar();
 	final JMenu fileMenu = new JMenu("File");
 	final JMenu systemMenu = new JMenu("System");
+	final JMenuItem quit = new JMenuItem("Quit");
 
 	months = new JComboBox<>();
 	final JComboBox<User> users = new JComboBox<>();
@@ -79,41 +79,63 @@ public class CalendarFrame extends JFrame
 	this.add(infoPanel, "south");
 
 	this.pack();
+	this.setLocationRelativeTo(null);
 	this.setVisible(true);
 
 	//Positions the frame in the middle of the monitor
-	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-	this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+	//Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	//this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     final private class PopUpAction implements ActionListener
     {
-	//if source is book.
 	@Override public void actionPerformed(final ActionEvent e) {
-	    final JFrame popUpFrame = new JFrame();
-	    popUpFrame.setLayout(new MigLayout());
-	    popUpFrame.add(days);
-	    popUpFrame.add(months);
-	    popUpFrame.add(years);
-	    popUpFrame.add(hours);
-	    popUpFrame.add(minutes);
-	    popUpFrame.setVisible(true);
-	    popUpFrame.pack();
+	    popUp.setLayout(new MigLayout());
+
+	    popUp.add(days);
+	    popUp.add(months);
+	    popUp.add(years);
+	    popUp.add(hours);
+	    popUp.add(minutes);
+	    popUp.add(confirmBooking);
+	    popUp.add(cancelBooking);
+
+
+	    //confirmBooking.addActionListener();
+	    cancelBooking.addActionListener(new CancelAction());
+
+	    popUp.pack();
+	    popUp.setLocationRelativeTo(popUp.getParent());
+	    popUp.setVisible(true);
 	}
 	//if source is change user {...}
     }
 
     final private class QuitAction implements ActionListener
     {
-
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (JOptionPane.showConfirmDialog(quit, "Are you sure you want to quit?", "WARNING", JOptionPane.YES_NO_OPTION) ==
+	    if (JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "WARNING", JOptionPane.YES_NO_OPTION) ==
 		JOptionPane.YES_OPTION) {
 		// yes option
+
 		System.exit(0);
 	    }
 	}
     }
+
+    final private class CancelAction implements ActionListener
+    {
+
+	@Override public void actionPerformed(final ActionEvent e) {
+	    if (JOptionPane.showConfirmDialog(cancelBooking, "Are you sure you want to cancel?", "WARNING",
+					      JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+		// yes option
+		popUp.dispose();
+	    }
+	}
+    }
 }
+
