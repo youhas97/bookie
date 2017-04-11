@@ -1327,10 +1327,16 @@
     <mapping directory="" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="miglayout-core-5.1-20170404.220012-733">
+    <library name="miglayout-core-5.1-20170410.220012-739">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/libraries/miglayout-core-5.1-20170404.220012-733.jar!/" />
-        <root url="jar://$PROJECT_DIR$/libraries/miglayout-swing-5.1-20170404.220021-733.jar!/" />
+        <root url="jar://Z:/Downloads/miglayout-core-5.1-20170410.220012-739.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="miglayout-swing-5.1-20170410.220020-739">
+      <CLASSES>
+        <root url="jar://Z:/Downloads/miglayout-swing-5.1-20170410.220020-739.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

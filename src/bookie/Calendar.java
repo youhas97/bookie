@@ -75,10 +75,7 @@ public class Calendar {
 	return false;
     }
 
-    final private class BookAction implements ActionListener
-    {
-
-	@Override public void actionPerformed(final ActionEvent e) {
-	}
+    @Override public String toString() {
+	return user + ", " + name;
     }
 }
