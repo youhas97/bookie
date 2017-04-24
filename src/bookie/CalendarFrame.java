@@ -2,7 +2,6 @@ package bookie;
 
 import net.miginfocom.swing.*;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Month;
@@ -15,36 +14,57 @@ public class CalendarFrame extends JFrame
     private static final int MAX_MONTH_DAYS = 31;
 
     private JDialog popUp;
-    private final JButton confirmBooking = new JButton("Book");
-    private final JButton cancelBooking = new JButton("Cancel");
+    private final JButton confirm = new JButton("Confirm");
+    private final JButton cancel = new JButton("Cancel");
+
+    private final JTextField calendarName = new JTextField(8);
 
     protected JComboBox<Integer> days, years, hours, minutes;
     protected JComboBox<Month> months;
+    protected JComboBox<User> users = new JComboBox<>();
 
     public CalendarFrame() {
 
 	popUp = new JDialog(this, true);
+	popUp.setLayout(new MigLayout("", "[][][][][]", "[][][]"));
+	popUp.add(cancel, "south, span 2");
+	popUp.add(confirm, "south");
+
+	cancel.addActionListener(new CancelAction());
+
+	final JMenuBar menuBar = new JMenuBar();
+
 	final JMenuItem bookAppointment = new JMenuItem("Book");
 	final JMenuItem changeUser = new JMenuItem("Change user");
+	final JMenuItem quit = new JMenuItem("Quit");
+	final JMenuItem createCalendar = new JMenuItem("Create calendar");
+
 	final JLabel currentUser = new JLabel("Current user: Hashem");
+
 	final JPanel infoPanel = new JPanel();
-	final JMenuBar menuBar = new JMenuBar();
+
 	final JMenu fileMenu = new JMenu("File");
 	final JMenu systemMenu = new JMenu("System");
-	final JMenuItem quit = new JMenuItem("Quit");
+	final JMenu userMenu = new JMenu("User");
+
 
 	months = new JComboBox<>();
-	final JComboBox<User> users = new JComboBox<>();
 	days = new JComboBox<>();
 	years = new JComboBox<>();
 	hours = new JComboBox<>();
 	minutes = new JComboBox<>();
 
 	menuBar.add(fileMenu);
+	menuBar.add(userMenu);
 	menuBar.add(systemMenu);
+
 	fileMenu.add(bookAppointment);
-	fileMenu.add(changeUser);
+	fileMenu.add(createCalendar);
+
 	systemMenu.add(quit);
+
+	userMenu.add(changeUser);
+
 	infoPanel.add(currentUser, "west");
 
 	for (Month month : Month.values()) {
@@ -70,7 +90,8 @@ public class CalendarFrame extends JFrame
 	    users.addItem(user);
 	}
 
-	bookAppointment.addActionListener(new PopUpAction());
+	bookAppointment.addActionListener(new BookAction());
+	createCalendar.addActionListener(new CreateCalendarAction());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
@@ -82,35 +103,34 @@ public class CalendarFrame extends JFrame
 	this.setLocationRelativeTo(null);
 	this.setVisible(true);
 
-	//Positions the frame in the middle of the monitor
-	//Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-	//this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
-    final private class PopUpAction implements ActionListener
+    final private class BookAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    popUp.setLayout(new MigLayout());
-
-	    popUp.add(days);
-	    popUp.add(months);
-	    popUp.add(years);
-	    popUp.add(hours);
-	    popUp.add(minutes);
-	    popUp.add(confirmBooking);
-	    popUp.add(cancelBooking);
-
-
-	    //confirmBooking.addActionListener();
-	    cancelBooking.addActionListener(new CancelAction());
+	    popUp.add(days, "north, west");
+	    popUp.add(months, "north, west");
+	    popUp.add(years, "north, west ,gapright unrelated");
+	    popUp.add(hours, "north, west");
+	    popUp.add(minutes, "north, west, wrap");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
 	}
-	//if source is change user {...}
+    }
+
+    final private class CreateCalendarAction implements ActionListener
+    {
+
+	@Override public void actionPerformed(final ActionEvent e) {
+	    popUp.add(users);
+	    popUp.add(calendarName);
+	    popUp.pack();
+	    popUp.setLocationRelativeTo(popUp.getParent());
+	    popUp.setVisible(true);
+	}
     }
 
     final private class QuitAction implements ActionListener
@@ -129,9 +149,8 @@ public class CalendarFrame extends JFrame
     {
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (JOptionPane.showConfirmDialog(cancelBooking, "Are you sure you want to cancel?", "WARNING",
+	    if (JOptionPane.showConfirmDialog(cancel, "Are you sure you want to cancel?", "WARNING",
 					      JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
 		// yes option
 		popUp.dispose();
 	    }

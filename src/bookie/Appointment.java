@@ -7,14 +7,12 @@ import java.time.Month;
 
 public class Appointment {
     private LocalDate date;
-    private LocalTime startTime, endTime;
+    private TimeSpan span;
     private String subject;
 
-    public Appointment(final LocalDate date, final LocalTime startTime,
-		       final LocalTime endTime, final String subject) {
+    public Appointment(final LocalDate date, final TimeSpan span, final String subject) {
 	this.date = date;
-	this.startTime = startTime;
-	this.endTime = endTime;
+	this.span = span;
 	this.subject = subject;
     }
 
@@ -22,9 +20,9 @@ public class Appointment {
 	LocalTime time = LocalTime.of(14,00);
 	LocalTime time2 = LocalTime.of(16, 00);
 	LocalDate date = LocalDate.of(2017, 03, 29);
-	Appointment app = new Appointment(date, time, time2, "bästa bulle på java");
+	Appointment app = new Appointment(date, new TimeSpan(time, time2), "bästa bulle på java");
 	System.out.println(time);
-	System.out.println(app.getTimeSpan());
+	System.out.println(app.span);
 	System.out.println(app);
     }
 
@@ -33,15 +31,15 @@ public class Appointment {
     }
 
     public LocalTime getStartTime() {
-	return startTime;
+	return span.getStartTime();
     }
 
     public LocalTime getEndTime() {
-	return endTime;
+	return span.getEndTime();
     }
 
-    public String getTimeSpan() {
-	return startTime + "-" + endTime;
+    public TimeSpan getSpan() {
+	return span;
     }
 
     public Month getMonth() {
@@ -58,6 +56,6 @@ public class Appointment {
 
     @Override public String toString() {
 	return date.getMonth() + " " + date.getDayOfMonth() + ", " + date.getYear() + " (" + date.getDayOfWeek() + ")" + ": " +
-	       subject + " (" + this.getTimeSpan() + ")";
+	       subject + " (" + span + ")";
     }
 }

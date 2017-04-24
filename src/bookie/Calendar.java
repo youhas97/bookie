@@ -27,23 +27,20 @@ public class Calendar {
 	}
     }
 
-    public void book(final LocalDate date, final LocalTime startTime, final LocalTime endTime, final String subject) {
-	if (startTime.isAfter(endTime)) {
-	    throw new IllegalArgumentException("Start time must preceed end time.");
-	}
+    public void book(final LocalDate date, final TimeSpan span, final String subject) {
 	if (date.isBefore(LocalDate.now())) {
 	    throw new IllegalArgumentException("Cannot book past date.");
 	}
-	if (isAlreadyBooked(startTime, endTime, date)) {
+	if (isAlreadyBooked(span, date)) {
 	    throw new IllegalArgumentException("Time is already booked");
 	}
 
-	appointments.add(new Appointment(date, startTime, endTime, subject));
+	appointments.add(new Appointment(date, span, subject));
 
     }
 
-    private boolean isTimeInSpan(LocalTime time, LocalTime startOfSpan, LocalTime endOfSpan) {
-	if (time.isAfter(startOfSpan) && time.isBefore(endOfSpan)) {
+    private boolean isTimeInSpan(LocalTime time, TimeSpan span) {
+	if (time.isAfter(span.getStartTime()) && time.isBefore(span.getEndTime())) {
 	    return true;
 	}
 	return false;
@@ -52,21 +49,22 @@ public class Calendar {
 
     private boolean overlapsBooking(LocalTime time, LocalDate date, List<Appointment> appointments) {
 	for (Appointment app : appointments) {
-	    if (app.getDate().compareTo(date) == 0 && isTimeInSpan(time, app.getStartTime(), app.getEndTime())) {
+	    if (app.getDate().compareTo(date) == 0 && isTimeInSpan(time, app.getSpan())) {
 		return true;
 	    }
 	}
 	return false;
     }
 
-    private boolean isAlreadyBooked(LocalTime startTime, LocalTime endTime, LocalDate date) {
+    private boolean isAlreadyBooked(TimeSpan span, LocalDate date) {
     /*
     	Checks every time between this appointment's starttime and endtime
     	and compares to every other appointment's starttime and endtime.
     	 */
-	for (int hour = startTime.getHour(); hour <= endTime.getHour(); hour++) {
+	for (int hour = span.getStartTime().getHour(); hour <= span.getEndTime().getHour(); hour++) {
 	    for (int minute = 0; minute < MINUTES_PER_HOUR; minute++) {
-		if ((LocalTime.of(hour, minute).isAfter(startTime) && LocalTime.of(hour, minute).isBefore(endTime)) &&
+		if ((LocalTime.of(hour, minute).isAfter(span.getStartTime()) &&
+		     LocalTime.of(hour, minute).isBefore(span.getEndTime())) &&
 		    overlapsBooking(LocalTime.of(hour, minute), date, appointments)) {
 		    return true;
 		}
