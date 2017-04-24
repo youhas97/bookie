@@ -1,6 +1,7 @@
 package bookie;
 
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,57 +15,46 @@ public class CalendarFrame extends JFrame
     private static final int MAX_MONTH_DAYS = 31;
 
     private JDialog popUp;
-    private final JButton confirm = new JButton("Confirm");
-    private final JButton cancel = new JButton("Cancel");
+    private final JButton confirmBooking = new JButton("Book");
+    private final JButton cancelBooking = new JButton("Cancel");
 
-    private final JTextField calendarName = new JTextField(8);
+    private JPanel timeSpan;
+    private JScrollPane users;
+    private JPanel userPanel;
 
-    protected JComboBox<Integer> days, years, hours, minutes;
+    protected JComboBox<Integer> days, years, startHour, startMinute, endHour, endMinute;
     protected JComboBox<Month> months;
-    protected JComboBox<User> users = new JComboBox<>();
 
     public CalendarFrame() {
 
 	popUp = new JDialog(this, true);
-	popUp.setLayout(new MigLayout("", "[][][][][]", "[][][]"));
-	popUp.add(cancel, "south, span 2");
-	popUp.add(confirm, "south");
-
-	cancel.addActionListener(new CancelAction());
-
-	final JMenuBar menuBar = new JMenuBar();
-
 	final JMenuItem bookAppointment = new JMenuItem("Book");
 	final JMenuItem changeUser = new JMenuItem("Change user");
-	final JMenuItem quit = new JMenuItem("Quit");
-	final JMenuItem createCalendar = new JMenuItem("Create calendar");
-
-	final JLabel currentUser = new JLabel("Current user: Hashem");
-
+	final JLabel currentUser = new JLabel("Current calendar: Hashem, fritid");
 	final JPanel infoPanel = new JPanel();
-
+	final JMenuBar menuBar = new JMenuBar();
 	final JMenu fileMenu = new JMenu("File");
 	final JMenu systemMenu = new JMenu("System");
-	final JMenu userMenu = new JMenu("User");
+	final JMenuItem quit = new JMenuItem("Quit");
+	final JScrollPane users = new JScrollPane();
+	users.add(User.getExistingUsers());
+	final JPanel userPanel = new JPanel();
 
-
-	months = new JComboBox<>();
 	days = new JComboBox<>();
 	years = new JComboBox<>();
-	hours = new JComboBox<>();
-	minutes = new JComboBox<>();
+	startHour = new JComboBox<>();
+	startMinute = new JComboBox<>();
+	endMinute = new JComboBox<>();
+	endHour = new JComboBox<>();
+	months = new JComboBox<>();
+
+	timeSpan = new JPanel();
 
 	menuBar.add(fileMenu);
-	menuBar.add(userMenu);
 	menuBar.add(systemMenu);
-
 	fileMenu.add(bookAppointment);
-	fileMenu.add(createCalendar);
-
+	fileMenu.add(changeUser);
 	systemMenu.add(quit);
-
-	userMenu.add(changeUser);
-
 	infoPanel.add(currentUser, "west");
 
 	for (Month month : Month.values()) {
@@ -81,17 +71,18 @@ public class CalendarFrame extends JFrame
 
 	for (int time = 0; time < MINUTES_PER_HOUR; time++) {
 	    if (time < HOURS_PER_DAY) {
-		hours.addItem(time);
+		startHour.addItem(time);
+		endHour.addItem(time);
 	    }
-	    minutes.addItem(time);
+	    startMinute.addItem(time);
+	    endMinute.addItem(time);
 	}
 
 	for (User user : User.getExistingUsers()) {
-	    users.addItem(user);
+	    users.add(user);
 	}
 
-	bookAppointment.addActionListener(new BookAction());
-	createCalendar.addActionListener(new CreateCalendarAction());
+	bookAppointment.addActionListener(new PopUpAction());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
@@ -102,31 +93,29 @@ public class CalendarFrame extends JFrame
 	this.pack();
 	this.setLocationRelativeTo(null);
 	this.setVisible(true);
-
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
-    final private class BookAction implements ActionListener
+    final private class PopUpAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    popUp.add(days, "north, west");
-	    popUp.add(months, "north, west");
-	    popUp.add(years, "north, west ,gapright unrelated");
-	    popUp.add(hours, "north, west");
-	    popUp.add(minutes, "north, west, wrap");
+	    popUp.setLayout(new MigLayout());
+	    timeSpan.add(startHour);
+	    timeSpan.add(startMinute);
+	    timeSpan.add(endHour);
+	    timeSpan.add(endMinute);
 
-	    popUp.pack();
-	    popUp.setLocationRelativeTo(popUp.getParent());
-	    popUp.setVisible(true);
-	}
-    }
+	    popUp.add(days);
+	    popUp.add(months);
+	    popUp.add(years, "wrap");
+	    popUp.add(timeSpan, "wrap");
 
-    final private class CreateCalendarAction implements ActionListener
-    {
+	    popUp.add(confirmBooking, "span 1");
+	    popUp.add(cancelBooking, "span 1");
 
-	@Override public void actionPerformed(final ActionEvent e) {
-	    popUp.add(users);
-	    popUp.add(calendarName);
+	    //confirmBooking.addActionListener();
+	    cancelBooking.addActionListener(new CancelAction());
+
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
@@ -139,7 +128,6 @@ public class CalendarFrame extends JFrame
 	    if (JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "WARNING", JOptionPane.YES_NO_OPTION) ==
 		JOptionPane.YES_OPTION) {
 		// yes option
-
 		System.exit(0);
 	    }
 	}
@@ -147,14 +135,28 @@ public class CalendarFrame extends JFrame
 
     final private class CancelAction implements ActionListener
     {
-
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (JOptionPane.showConfirmDialog(cancel, "Are you sure you want to cancel?", "WARNING",
+	    if (JOptionPane.showConfirmDialog(cancelBooking, "Are you sure you want to cancel?", "WARNING",
 					      JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 		// yes option
 		popUp.dispose();
 	    }
 	}
     }
+
+    final private class BookAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    //selectedCalendar.book(days.getSelectedIndex(), hours.getSelectedIndex(),   )
+	}
+    }
+
+    final private class ChangeUserAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    popUp.add()
+	}
+    }
+
 }
 
