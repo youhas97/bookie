@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="miglayout-swing-5.1-20170410.220020-739" level="project" />
-    <orderEntry type="library" name="miglayout-core-5.1-20170410.220012-739" level="project" />
+    <orderEntry type="library" name="miglayout-core-5.1-20170404.220012-733" level="project" />
+    <orderEntry type="library" name="miglayout-swing-5.1-20170404.220021-733" level="project" />
   </component>
 </module>
