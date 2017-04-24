@@ -131,6 +131,11 @@ public class CalendarFrame extends JFrame
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
+
+	    if (e.getSource().equals(confirm)) {
+		String calName = calendarName.getText();
+		Calendar calendar = new Calendar(users.getSelectedItem(), calName);
+	    }
 	}
     }
 
