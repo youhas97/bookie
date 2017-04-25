@@ -14,7 +14,7 @@ public class CalendarFrame extends JFrame
     private static final int MINUTES_PER_HOUR = 60;
     private static final int MAX_MONTH_DAYS = 31;
 
-    private JDialog popUp;
+    private JDialog popUp = null;
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
 
@@ -85,8 +85,8 @@ public class CalendarFrame extends JFrame
 	    users.addItem(user);
 	}
 
-	bookAppointment.addActionListener(new BookAction());
-	createCalendar.addActionListener(new CreateCalendarAction());
+	bookAppointment.addActionListener(new BookPopup());
+	createCalendar.addActionListener(new CreateCalendarPopup());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
@@ -108,7 +108,7 @@ public class CalendarFrame extends JFrame
 	popUp.add(cancel, "east");
     }
 
-    final private class BookAction implements ActionListener
+    final private class BookPopup implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp();
@@ -124,9 +124,17 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    final private class CreateCalendarAction implements ActionListener
+    final private class ConfirmCreateCalendar implements ActionListener
     {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    String calName = calendarName.getText();
+	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
+	    System.out.println(cal);
+	}
+    }
 
+    final private class CreateCalendarPopup implements ActionListener
+    {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp();
 	    popUp.add(users, "gapright unrelated");
@@ -135,11 +143,7 @@ public class CalendarFrame extends JFrame
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
-
-	    if (e.getSource().equals(confirm)) {
-		String calName = calendarName.getText();
-		Calendar calendar = new Calendar(users.getSelectedItem(), calName);
-	    }
+	    confirm.addActionListener(new ConfirmCreateCalendar());
 	}
     }
 
