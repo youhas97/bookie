@@ -18,19 +18,13 @@ public class CalendarFrame extends JFrame
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
 
-    private final JTextField calendarName = new JTextField(8);
+    private final JTextField calendarName = new JTextField(10);
 
     protected JComboBox<Integer> days, years, hours, minutes;
     protected JComboBox<Month> months;
     protected JComboBox<User> users = new JComboBox<>();
 
     public CalendarFrame() {
-
-	popUp = new JDialog(this, true);
-	popUp.setLayout(new MigLayout("", "[][][][][]", "[][][]"));
-	popUp.add(cancel, "south, span 2");
-	popUp.add(confirm, "south");
-
 	cancel.addActionListener(new CancelAction());
 
 	final JMenuBar menuBar = new JMenuBar();
@@ -107,14 +101,22 @@ public class CalendarFrame extends JFrame
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
+    private void createPopUp() {
+	popUp = new JDialog(this, true);
+	popUp.setLayout(new MigLayout("", "[][][][][]", "[][]"));
+	popUp.add(confirm, "south");
+	popUp.add(cancel, "east");
+    }
+
     final private class BookAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    popUp.add(days, "north, west");
-	    popUp.add(months, "north, west");
-	    popUp.add(years, "north, west ,gapright unrelated");
-	    popUp.add(hours, "north, west");
-	    popUp.add(minutes, "north, west, wrap");
+	    createPopUp();
+	    popUp.add(days);
+	    popUp.add(months);
+	    popUp.add(years, "gapright unrelated");
+	    popUp.add(hours);
+	    popUp.add(minutes, "wrap 100");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
@@ -126,8 +128,10 @@ public class CalendarFrame extends JFrame
     {
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    popUp.add(users);
+	    createPopUp();
+	    popUp.add(users, "gapright unrelated");
 	    popUp.add(calendarName);
+
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
