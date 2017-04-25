@@ -110,20 +110,20 @@ public class CalendarFrame extends JFrame
 	}
 
 	popUp = new JDialog(this, true);
-	popUp.setLayout(new MigLayout("", "[][][][][]", "[][]"));
-	popUp.add(confirm, "south");
-	popUp.add(cancel, "east");
+	popUp.setLayout(new MigLayout());
+	popUp.add(confirm, "cell 0 5 1 5");
+	popUp.add(cancel, "cell 4 5 1 5, grow");
     }
 
     final private class BookPopup implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp();
-	    popUp.add(days);
-	    popUp.add(months);
-	    popUp.add(years, "gapright unrelated");
-	    popUp.add(hours);
-	    popUp.add(minutes, "wrap 100");
+	    popUp.add(days, "cell 0 0");
+	    popUp.add(months, "cell 0 0");
+	    popUp.add(years, "cell 0 0, gapright unrelated");
+	    popUp.add(hours, "cell 4 0");
+	    popUp.add(minutes, "cell 4 0");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
