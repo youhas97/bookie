@@ -13,5 +13,6 @@ public class Main {
 	System.out.println(cal);
 
 	CalendarFrame calFrame = new CalendarFrame();
+	calFrame.showCalendar(cal);
     }
 }

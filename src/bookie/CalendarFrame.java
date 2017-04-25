@@ -19,6 +19,7 @@ public class CalendarFrame extends JFrame
     private final JButton cancel = new JButton("Cancel");
 
     private final JTextField calendarName = new JTextField(10);
+    private JLabel appointmentLabel;
 
     protected JComboBox<Integer> days, years, hours, minutes;
     protected JComboBox<Month> months;
@@ -38,12 +39,12 @@ public class CalendarFrame extends JFrame
 
 	final JPanel infoPanel = new JPanel();
 
-	final JScrollPane currentCalendar = new JScrollPane();
+	appointmentLabel = new JLabel();
+	final JScrollPane appointmentScrollPane = new JScrollPane(appointmentLabel);
 
 	final JMenu fileMenu = new JMenu("File");
 	final JMenu systemMenu = new JMenu("System");
 	final JMenu userMenu = new JMenu("User");
-
 
 	months = new JComboBox<>();
 	days = new JComboBox<>();
@@ -93,7 +94,7 @@ public class CalendarFrame extends JFrame
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
 	infoPanel.setLayout(new MigLayout());
-	this.add(currentCalendar, "center");
+	this.add(appointmentScrollPane, "center");
 	this.add(menuBar, "west");
 	this.add(infoPanel, "south");
 
@@ -102,6 +103,12 @@ public class CalendarFrame extends JFrame
 	this.setVisible(true);
 
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    public void showCalendar(Calendar cal) {
+	for (Appointment app : cal.getAppointments()) {
+	    appointmentLabel.setText(String.valueOf(app));
+	}
     }
 
     private void createPopUp() {
@@ -136,7 +143,7 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    String calName = calendarName.getText();
 	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
-	    System.out.println(cal);
+	    showCalendar(cal);
 	}
     }
 

@@ -1,7 +1,5 @@
 package bookie;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -71,6 +69,10 @@ public class Calendar {
 	    }
 	}
 	return false;
+    }
+
+    public List<Appointment> getAppointments() {
+	return appointments;
     }
 
     @Override public String toString() {
