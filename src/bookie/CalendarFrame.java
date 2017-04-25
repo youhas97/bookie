@@ -38,6 +38,8 @@ public class CalendarFrame extends JFrame
 
 	final JPanel infoPanel = new JPanel();
 
+	final JScrollPane currentCalendar = new JScrollPane();
+
 	final JMenu fileMenu = new JMenu("File");
 	final JMenu systemMenu = new JMenu("System");
 	final JMenu userMenu = new JMenu("User");
@@ -91,6 +93,7 @@ public class CalendarFrame extends JFrame
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
 	infoPanel.setLayout(new MigLayout());
+	this.add(currentCalendar, "center");
 	this.add(menuBar, "west");
 	this.add(infoPanel, "south");
 
@@ -102,6 +105,10 @@ public class CalendarFrame extends JFrame
     }
 
     private void createPopUp() {
+	for (ActionListener listener : confirm.getActionListeners()) {
+	    confirm.removeActionListener(listener);
+	}
+
 	popUp = new JDialog(this, true);
 	popUp.setLayout(new MigLayout("", "[][][][][]", "[][]"));
 	popUp.add(confirm, "south");
