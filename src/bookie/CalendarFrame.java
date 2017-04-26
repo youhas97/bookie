@@ -15,10 +15,11 @@ public class CalendarFrame extends JFrame
     private static final int MAX_MONTH_DAYS = 31;
 
     private JDialog popUp = null;
+    private final JPanel essentialPopUpButtons = new JPanel();
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
 
-    private final JTextField calendarName = new JTextField(10);
+    private final JTextField calendarName = new JTextField();
     private JLabel appointmentLabel;
 
     protected JComboBox<Integer> days, years, hours, minutes;
@@ -118,8 +119,9 @@ public class CalendarFrame extends JFrame
 
 	popUp = new JDialog(this, true);
 	popUp.setLayout(new MigLayout());
-	popUp.add(confirm, "cell 0 5 1 5");
-	popUp.add(cancel, "cell 4 5 1 5, grow");
+	essentialPopUpButtons.add(confirm, "west");
+	essentialPopUpButtons.add(cancel, "east");
+	popUp.add(essentialPopUpButtons, "south");
     }
 
     final private class BookPopup implements ActionListener
@@ -151,8 +153,8 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp();
-	    popUp.add(users, "gapright unrelated");
-	    popUp.add(calendarName);
+	    popUp.add(users, "cell 0 0");
+	    popUp.add(calendarName, "cell 4 0, w 200");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
