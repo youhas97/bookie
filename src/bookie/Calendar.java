@@ -12,11 +12,17 @@ public class Calendar {
     private User user;
     private String name;
     private List<Appointment> appointments;
+    private static List<Calendar> calendars = new ArrayList<>();
 
     public Calendar(final User user, final String name) {
 	this.user = user;
 	this.name = name;
 	appointments = new ArrayList<>();
+	if (isExistingCalendar(this)) {
+	    System.out.println("wadwadawdwa");
+	    throw new IllegalArgumentException("this calendar already exists.");
+	}
+	calendars.add(this);
     }
 
     public void show() {
@@ -64,6 +70,39 @@ public class Calendar {
 		if ((LocalTime.of(hour, minute).isAfter(span.getStartTime()) &&
 		     LocalTime.of(hour, minute).isBefore(span.getEndTime())) &&
 		    overlapsBooking(LocalTime.of(hour, minute), date, appointments)) {
+		    return true;
+		}
+	    }
+	}
+	return false;
+    }
+
+    @Override public boolean equals(Object other) {
+	if (other instanceof Calendar) {
+	    System.out.println("equals");
+	    return equalsCalendar((Calendar) other);
+	}
+	return false;
+    }
+
+    public static void main(String[] args) {
+	User bertil = new User("Bertil");
+	Calendar cal = new Calendar(bertil, "TestCal");
+	Calendar cal2 = new Calendar(bertil, "TestCal");
+    }
+
+    private boolean equalsCalendar(Calendar cal) {
+	if (name.equals(cal.name) && user.equals(cal.user)) {
+	    System.out.println("equalscalendar");
+	    return true;
+	} else return false;
+    }
+
+    static boolean isExistingCalendar(Calendar cal) {
+	if (!calendars.isEmpty() && calendars != null) {
+	    for (Calendar calendar : calendars) {
+		if (cal.equals(calendar)) {
+		    System.out.println("existingcalendar");
 		    return true;
 		}
 	    }

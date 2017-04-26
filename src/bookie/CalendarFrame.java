@@ -1,14 +1,15 @@
 package bookie;
 
-import javafx.scene.input.MouseEvent;
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.Year;
+import java.awt.BorderLayout;
 
 public class CalendarFrame extends JFrame
 {
@@ -23,13 +24,11 @@ public class CalendarFrame extends JFrame
     private final JPanel timeSpanPanel = new JPanel();
 
     private final JTextField calendarName = new JTextField();
-    private final JTextField subject = new JTextField("Subject", 7);
     private JLabel appointmentLabel;
 
-    private JComboBox<Integer> days, years, startHour, startMinute, endHour, endMinute;
-    private JComboBox<Month> months;
-    private JComboBox<User> users = new JComboBox<>();
-    private JComboBox<Calendar> calendars = new JComboBox<>();
+    protected JComboBox<Integer> days, years, startHour, startMinute, endHour, endMinute;
+    protected JComboBox<Month> months;
+    protected JComboBox<User> users = new JComboBox<>();
 
     public CalendarFrame() {
 	cancel.addActionListener(new CancelAction());
@@ -59,6 +58,21 @@ public class CalendarFrame extends JFrame
 	startMinute = new JComboBox<>();
 	endHour = new JComboBox<>();
 	endMinute = new JComboBox<>();
+
+	final JPanel startTimePanel = new JPanel();
+	startTimePanel.add(new JLabel("Start Time"), BorderLayout.NORTH);
+	startTimePanel.add(startHour, BorderLayout.SOUTH);
+	startTimePanel.add(startMinute, BorderLayout.SOUTH);
+
+	final JPanel endTimePanel = new JPanel();
+	endTimePanel.add(new JLabel("End Time"), BorderLayout.NORTH);
+
+	endTimePanel.add(endHour, BorderLayout.SOUTH);
+	endTimePanel.add(endMinute, BorderLayout.SOUTH);
+
+	timeSpanPanel.setLayout(new BorderLayout());
+	timeSpanPanel.add(startTimePanel, BorderLayout.WEST);
+	timeSpanPanel.add(endTimePanel, BorderLayout.EAST);
 
 	menuBar.add(fileMenu);
 	menuBar.add(userMenu);
@@ -145,16 +159,8 @@ public class CalendarFrame extends JFrame
 	    createPopUp(new ConfirmBook());
 	    popUp.add(days, "cell 0 0");
 	    popUp.add(months, "cell 0 0");
-	    popUp.add(years, "cell 1 0, grow, gapright unrelated");
-	    popUp.add(startHour, "cell 0 2");
-	    popUp.add(startMinute, "cell 0 2, gapright unrelated");
+	    popUp.add(years, "cell 0 0, gapright unrelated");
 	    popUp.add(timeSpanPanel, "south");
-	    popUp.add(new JLabel("Start Time"), "cell 0 1, gapright unrelated");
-	    popUp.add(new JLabel("End Time"), "cell 1 1, span 2");
-	    popUp.add(endHour, "cell 1 2");
-	    popUp.add(endMinute, "cell 1 2");
-
-	    popUp.add(subject, "cell 2 0");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
@@ -176,7 +182,8 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    String calName = calendarName.getText();
 	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
-	    System.out.println("Calendar calendar!");
+	    showCalendar(cal);
+	    System.out.println("Created calendar!");
 	}
     }
 
