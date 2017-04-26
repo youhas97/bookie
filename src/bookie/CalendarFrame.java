@@ -5,8 +5,11 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.Year;
+import java.awt.BorderLayout;
 
 public class CalendarFrame extends JFrame
 {
@@ -18,11 +21,14 @@ public class CalendarFrame extends JFrame
     private final JPanel essentialPopUpButtons = new JPanel();
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
+    final JPanel timeSpanPanel = new JPanel();
+
+    private final static String MONTH_TITLE = "Month";
 
     private final JTextField calendarName = new JTextField();
     private JLabel appointmentLabel;
 
-    protected JComboBox<Integer> days, years, hours, minutes;
+    protected JComboBox<Integer> days, years, startHour, startMinute, endHour, endMinute;
     protected JComboBox<Month> months;
     protected JComboBox<User> users = new JComboBox<>();
 
@@ -50,8 +56,25 @@ public class CalendarFrame extends JFrame
 	months = new JComboBox<>();
 	days = new JComboBox<>();
 	years = new JComboBox<>();
-	hours = new JComboBox<>();
-	minutes = new JComboBox<>();
+	startHour = new JComboBox<>();
+	startMinute = new JComboBox<>();
+	endHour = new JComboBox<>();
+	endMinute = new JComboBox<>();
+
+	final JPanel startTimePanel = new JPanel();
+	startTimePanel.add(new JLabel("Start Time"), BorderLayout.NORTH);
+	startTimePanel.add(startHour, BorderLayout.SOUTH);
+	startTimePanel.add(startMinute, BorderLayout.SOUTH);
+
+	final JPanel endTimePanel = new JPanel();
+	endTimePanel.add(new JLabel("End Time"), BorderLayout.NORTH);
+
+	endTimePanel.add(endHour, BorderLayout.SOUTH);
+	endTimePanel.add(endMinute, BorderLayout.SOUTH);
+
+	timeSpanPanel.setLayout(new BorderLayout());
+	timeSpanPanel.add(startTimePanel, BorderLayout.WEST);
+	timeSpanPanel.add(endTimePanel, BorderLayout.EAST);
 
 	menuBar.add(fileMenu);
 	menuBar.add(userMenu);
@@ -80,9 +103,11 @@ public class CalendarFrame extends JFrame
 
 	for (int time = 0; time < MINUTES_PER_HOUR; time++) {
 	    if (time < HOURS_PER_DAY) {
-		hours.addItem(time);
+		startHour.addItem(time);
+		endHour.addItem(time);
 	    }
-	    minutes.addItem(time);
+	    startMinute.addItem(time);
+	    endMinute.addItem(time);
 	}
 
 	for (User user : User.getExistingUsers()) {
@@ -117,7 +142,7 @@ public class CalendarFrame extends JFrame
 	appointmentLabel.setText(buf.toString());
     }
 
-    private void createPopUp() {
+    private void createPopUp(ActionListener confirmAction) {
 	for (ActionListener listener : confirm.getActionListeners()) {
 	    confirm.removeActionListener(listener);
 	}
@@ -127,21 +152,30 @@ public class CalendarFrame extends JFrame
 	essentialPopUpButtons.add(confirm, "west");
 	essentialPopUpButtons.add(cancel, "east");
 	popUp.add(essentialPopUpButtons, "south");
+	confirm.addActionListener(confirmAction);
     }
 
     final private class BookPopup implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp();
+	    createPopUp(new ConfirmBook());
 	    popUp.add(days, "cell 0 0");
 	    popUp.add(months, "cell 0 0");
 	    popUp.add(years, "cell 0 0, gapright unrelated");
-	    popUp.add(hours, "cell 4 0");
-	    popUp.add(minutes, "cell 4 0");
+	    popUp.add(timeSpanPanel, "south");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
+	}
+    }
+
+    final private class ConfirmBook implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    TimeSpan span = new TimeSpan(LocalTime.of(startHour.getSelectedIndex(), startMinute.getSelectedIndex()),
+					 LocalTime.of(endHour.getSelectedIndex(), endMinute.getSelectedIndex()));
+	    //Appointment app = new Appointment( LocalDate.of(years.getSelectedIndex(), months.getSelectedIndex(), days.getSelectedIndex()), span,);
 	}
     }
 
@@ -151,20 +185,20 @@ public class CalendarFrame extends JFrame
 	    String calName = calendarName.getText();
 	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
 	    showCalendar(cal);
+	    System.out.println("Created calendar!");
 	}
     }
 
     final private class CreateCalendarPopup implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp();
+	    createPopUp(new ConfirmCreateCalendar());
 	    popUp.add(users, "cell 0 0");
 	    popUp.add(calendarName, "cell 4 0, w 200");
 
 	    popUp.pack();
 	    popUp.setLocationRelativeTo(popUp.getParent());
 	    popUp.setVisible(true);
-	    confirm.addActionListener(new ConfirmCreateCalendar());
 	}
     }
 
