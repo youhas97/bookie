@@ -95,9 +95,9 @@ public class CalendarFrame extends JFrame
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
 	infoPanel.setLayout(new MigLayout());
-	this.add(appointmentScrollPane, "center");
-	this.add(menuBar, "west");
-	this.add(infoPanel, "south");
+	this.add(appointmentScrollPane, "cell 0 1, w 400::1920, h 50::1080, span 2, grow");
+	this.add(menuBar, "cell 0 0");
+	this.add(infoPanel, "cell 2 0");
 
 	this.pack();
 	this.setLocationRelativeTo(null);
@@ -107,9 +107,14 @@ public class CalendarFrame extends JFrame
     }
 
     public void showCalendar(Calendar cal) {
+	StringBuilder buf = new StringBuilder();
+	buf.append("<html>");
 	for (Appointment app : cal.getAppointments()) {
-	    appointmentLabel.setText(String.valueOf(app));
+	    buf.append(String.valueOf(app));
+	    buf.append("<br>");
 	}
+	buf.append("<html>");
+	appointmentLabel.setText(buf.toString());
     }
 
     private void createPopUp() {
