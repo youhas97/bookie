@@ -183,7 +183,7 @@ public class CalendarFrame extends JFrame
 	    String calName = calendarName.getText();
 	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
 	    showCalendar(cal);
-	    System.out.println("Created calendar!");
+	    System.out.println("Calendar was successfully created!");
 	}
     }
 
