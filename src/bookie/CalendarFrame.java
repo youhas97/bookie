@@ -21,9 +21,7 @@ public class CalendarFrame extends JFrame
     private final JPanel essentialPopUpButtons = new JPanel();
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
-    final JPanel timeSpanPanel = new JPanel();
-
-    private final static String MONTH_TITLE = "Month";
+    private final JPanel timeSpanPanel = new JPanel();
 
     private final JTextField calendarName = new JTextField();
     private JLabel appointmentLabel;
