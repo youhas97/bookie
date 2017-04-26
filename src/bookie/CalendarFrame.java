@@ -118,9 +118,9 @@ public class CalendarFrame extends JFrame
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
 	infoPanel.setLayout(new MigLayout());
-	this.add(appointmentScrollPane, "cell 0 1, w 400::1920, h 50::1080, span 2, grow");
+	this.add(appointmentScrollPane, "cell 0 1, w 550::1000, h 50::500, span 2, grow");
 	this.add(menuBar, "cell 0 0");
-	this.add(infoPanel, "cell 2 0");
+	this.add(infoPanel, "cell 1 0");
 
 	this.pack();
 	this.setLocationRelativeTo(null);
