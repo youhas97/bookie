@@ -12,23 +12,13 @@ public class Calendar {
     private User user;
     private String name;
     private List<Appointment> appointments;
-    private static List<Calendar> calendars = new ArrayList<>();
 
     public Calendar(final User user, final String name) {
 	this.user = user;
 	this.name = name;
 	appointments = new ArrayList<>();
-	if (isExistingCalendar(this)) {
-	    System.out.println("wadwadawdwa");
-	    throw new IllegalArgumentException("this calendar already exists.");
-	}
-	calendars.add(this);
-    }
 
-    public void show() {
-	for (Appointment app : appointments) {
-	    System.out.println(app);
-	}
+	user.addCalendar(this);
     }
 
     public void book(final LocalDate date, final TimeSpan span, final String subject) {
@@ -38,9 +28,7 @@ public class Calendar {
 	if (isAlreadyBooked(span, date)) {
 	    throw new IllegalArgumentException("Time is already booked");
 	}
-
 	appointments.add(new Appointment(date, span, subject));
-
     }
 
     private boolean isTimeInSpan(LocalTime time, TimeSpan span) {
@@ -77,33 +65,13 @@ public class Calendar {
 	return false;
     }
 
-    @Override public boolean equals(Object other) {
-	if (other instanceof Calendar) {
-	    System.out.println("equals");
-	    return equalsCalendar((Calendar) other);
-	}
-	return false;
-    }
-
-    public static void main(String[] args) {
-	User bertil = new User("Bertil");
-	Calendar cal = new Calendar(bertil, "TestCal");
-	Calendar cal2 = new Calendar(bertil, "TestCal");
-    }
-
-    private boolean equalsCalendar(Calendar cal) {
-	if (name.equals(cal.name) && user.equals(cal.user)) {
-	    System.out.println("equalscalendar");
-	    return true;
-	} else return false;
-    }
-
     static boolean isExistingCalendar(Calendar cal) {
-	if (!calendars.isEmpty() && calendars != null) {
-	    for (Calendar calendar : calendars) {
-		if (cal.equals(calendar)) {
-		    System.out.println("existingcalendar");
-		    return true;
+	for (User user : User.getExistingUsers()) {
+	    if (!user.getCalendars().isEmpty()) {
+		for (Calendar calendar : user.getCalendars()) {
+		    if (cal.name.equals(calendar.name)) {
+			return true;
+		    }
 		}
 	    }
 	}
@@ -114,7 +82,11 @@ public class Calendar {
 	return appointments;
     }
 
+    public User getUser() {
+	return user;
+    }
+
     @Override public String toString() {
-	return user + ", " + name;
+	return name;
     }
 }
