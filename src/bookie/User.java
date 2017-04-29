@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private static UserList existingUsers = UserList.getInstance();
+
     private String name;
-    private static List<User> existingUsers = new ArrayList<>();
 
     public User(final String name) {
 	this.name = name;
-	existingUsers.add(this);
+	existingUsers.addUser(this);
     }
 
     @Override
@@ -17,7 +18,11 @@ public class User {
 	return name;
     }
 
-    public static List<User> getExistingUsers() {
+    public String getName() {
+	return name;
+    }
+
+    public static UserList getExistingUsers() {
 	return existingUsers;
     }
 }

@@ -6,6 +6,8 @@ import java.time.LocalTime;
 public class Main {
     public static void main(String[] args) {
 	User bertil = new User("Bertil");
+	User anders = new User("Anders");
+	User sven = new User("Sven");
 	Calendar cal = new Calendar(bertil, "TestCal");
 	TimeSpan span = new TimeSpan(LocalTime.of(16, 04), LocalTime.of(18, 31));
 	TimeSpan span2 = new TimeSpan(LocalTime.of(19, 00), LocalTime.of(21, 00));

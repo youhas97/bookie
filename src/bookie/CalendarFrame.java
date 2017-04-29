@@ -108,7 +108,7 @@ public class CalendarFrame extends JFrame
 	    endMinute.addItem(time);
 	}
 
-	for (User user : User.getExistingUsers()) {
+	for (User user : UserList.getExistingUsers()) {
 	    users.addItem(user);
 	}
 
@@ -183,7 +183,11 @@ public class CalendarFrame extends JFrame
 	    String calName = calendarName.getText();
 	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
 	    showCalendar(cal);
-	    System.out.println("Calendar was successfully created!");
+	    Object[] options = { "OK" };
+	    int confirmation = JOptionPane
+		    .showOptionDialog(popUp, "Calendar successfully created!", "Calendar", JOptionPane.PLAIN_MESSAGE,
+				      JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    if (confirmation == JOptionPane.OK_OPTION) popUp.dispose();
 	}
     }
 
