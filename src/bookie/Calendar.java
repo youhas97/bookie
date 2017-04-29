@@ -29,6 +29,7 @@ public class Calendar {
 	    throw new IllegalArgumentException("Time is already booked");
 	}
 	appointments.add(new Appointment(date, span, subject));
+	appointments.sort(new AppointmentComparator());
     }
 
     private boolean isTimeInSpan(LocalTime time, TimeSpan span) {
