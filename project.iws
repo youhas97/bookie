@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notebook.odt" afterPath="$PROJECT_DIR$/notebook.odt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.iws" afterPath="$PROJECT_DIR$/project.iws" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -781,7 +780,7 @@
       <workItem from="1493196719384" duration="2673000" />
       <workItem from="1493207007897" duration="3876000" />
       <workItem from="1493474244011" duration="3596000" />
-      <workItem from="1493478307778" duration="2000" />
+      <workItem from="1493478307778" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -895,11 +894,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493477833910</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="updated notebook.odt">
+      <created>1493478322681</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1493478322681</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65298000" />
+    <option name="totallyTimeSpent" value="65319000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1055" extended-state="0" />
@@ -959,7 +965,8 @@
     <MESSAGE value="fixed popup layout" />
     <MESSAGE value="Can now check for existing calendars" />
     <MESSAGE value="created UserList class which handles and sorts existing users by name" />
-    <option name="LAST_COMMIT_MESSAGE" value="created UserList class which handles and sorts existing users by name" />
+    <MESSAGE value="updated notebook.odt" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated notebook.odt" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
