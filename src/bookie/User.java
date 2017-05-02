@@ -13,6 +13,15 @@ public class User {
 	existingUsers.add(this);
     }
 
+    public static boolean userExists(String name) {
+	for (User user : existingUsers) {
+	    if (name.equals(user.name)) {
+		return true;
+	    }
+	}
+	return false;
+    }
+
     public List<Calendar> getCalendars() {
 	return calendars;
     }

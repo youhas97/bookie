@@ -26,12 +26,6 @@ public class Main {
 	hashemHome.book(LocalDate.of(2017, 07, 16), span2, "El has bezazi");
 	hashemHome.book(LocalDate.of(2017, 07, 17), span3, "Köpa bästa eire");
 
-	LocalDate date1 = LocalDate.of(2017, 07, 17);
-	LocalDate date2 = LocalDate.of(2017, 07, 16);
-	if (date1.isAfter(date2) || span3.getStartTime().isBefore(span2.getStartTime())) {
-	    System.out.println("funkar");
-	}
-
 	CalendarFrame calFrame = new CalendarFrame();
     }
 }
