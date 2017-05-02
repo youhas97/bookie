@@ -6,15 +6,18 @@ import java.util.List;
 public class User {
     private String name;
     private List<Calendar> calendars = new ArrayList<>();
-    private static List<User> existingUsers = new ArrayList<>();
+    private UserList existingUsers = new UserList();
 
     public User(final String name) {
+	if (userExists(name)) {
+	    throw new UnsupportedOperationException("A user with this name already exists");
+	}
 	this.name = name;
-	existingUsers.add(this);
+	existingUsers.addUser(this);
     }
 
-    public static boolean userExists(String name) {
-	for (User user : existingUsers) {
+    public boolean userExists(String name) {
+	for (User user : existingUsers.getExistingUsers()) {
 	    if (name.equals(user.name)) {
 		return true;
 	    }
@@ -30,10 +33,6 @@ public class User {
 	return name;
     }
 
-    public static List<User> getExistingUsers() {
-	return existingUsers;
-    }
-
     @Override public String toString() {
 	return name;
     }
@@ -41,7 +40,6 @@ public class User {
     public void addCalendar(Calendar cal) {
 	if (!Calendar.isExistingCalendar(cal)) {
 	    calendars.add(cal);
-	    System.out.println("Calendar created");
-	} else System.out.println("Calendar already exists");
+	} else throw new IllegalArgumentException("Calendar already exists");
     }
 }

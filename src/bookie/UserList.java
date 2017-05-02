@@ -17,8 +17,7 @@ public class UserList
 	existingUsers.sort(new UserComparator());
     }
 
-    public static List<User> getExistingUsers() {
+    public List<User> getExistingUsers() {
 	return existingUsers;
     }
-
 }

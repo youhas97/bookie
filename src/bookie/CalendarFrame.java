@@ -5,6 +5,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -13,6 +14,8 @@ import java.awt.BorderLayout;
 
 public class CalendarFrame extends JFrame
 {
+    UserList userList = UserList.getInstance();
+
     private static final int HOURS_PER_DAY = 24;
     private static final int MINUTES_PER_HOUR = 60;
     private static final int MAX_MONTH_DAYS = 31;
@@ -36,6 +39,7 @@ public class CalendarFrame extends JFrame
     private JComboBox<Month> months;
     private JComboBox<User> users = new JComboBox<>();
     private JComboBox<Calendar> userCalendars = new JComboBox<>();
+    private Object[] options = { "OK" };
     private JComboBox<Appointment> appointments = new JComboBox<>();
 
     public CalendarFrame() {
@@ -85,7 +89,6 @@ public class CalendarFrame extends JFrame
 	menuBar.add(systemMenu);
 
 	fileMenu.add(bookAppointment);
-	fileMenu.add(cancelAppointment);
 	fileMenu.add(createCalendar);
 
 	systemMenu.add(quit);
@@ -113,13 +116,13 @@ public class CalendarFrame extends JFrame
 	    endMinute.addItem(time);
 	}
 
-	for (User user : User.getExistingUsers()) {
-	    users.addItem(user);
-	}
+	updateUsers();
 
 	changeDisplayCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	bookAppointment.addActionListener(new BookPopupAction());
 	createCalendar.addActionListener(new CreateCalendarPopupAction());
+	final JButton changeCurrentCalendar = new JButton("Change calendar");
+	changeCurrentCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	newUser.addActionListener(new NewUserPopupAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
 	changeCancelCalendar.addActionListener(new ChangeCancelCalendarAction());
@@ -135,6 +138,13 @@ public class CalendarFrame extends JFrame
 	this.setVisible(true);
 
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    private void updateUsers() {
+	users.removeAllItems();
+	for (User user : userList.getExistingUsers()) {
+	    users.addItem(user);
+	}
     }
 
     private void showUsersCalendars(User user) {
@@ -171,6 +181,11 @@ public class CalendarFrame extends JFrame
 	essentialPopUpButtons.add(cancel, "east");
 	popUp.add(essentialPopUpButtons, "south");
 	confirm.addActionListener(confirmAction);
+    }
+
+    private void showErrorDialog(Exception e) {
+	JOptionPane.showOptionDialog(confirm, e.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE,
+				     null, options, options[0]);
     }
 
     final private class CancelAppointmentPopupAction implements ActionListener
@@ -233,24 +248,32 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    String name = newUserName.getText();
-	    if (!User.userExists(name)) {
+	    try {
 		User user = new User(name);
 		popUp.dispose();
-		System.out.println("\"" + name + "\"" + " created");
-
-	    } else System.out.println(name + " already exits. Try again");
+		JOptionPane
+			.showOptionDialog(confirm, "New user \"" + name + "\"" + " created", "Error", JOptionPane.PLAIN_MESSAGE,
+					  JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    } catch (UnsupportedOperationException exception) {
+		showErrorDialog(exception);
+	    }
 	}
     }
 
     final private class ConfirmBookAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    TimeSpan span = new TimeSpan(LocalTime.of(startHour.getSelectedIndex(), startMinute.getSelectedIndex()),
-					 LocalTime.of(endHour.getSelectedIndex(), endMinute.getSelectedIndex()));
-	    ((Calendar) userCalendars.getSelectedItem()).book(LocalDate.of((int) years.getSelectedItem(),
-									   ((Month) months.getSelectedItem()).getValue(),
-									   (int) days.getSelectedItem()), span,
-							      subject.getText());
+	    try {
+		TimeSpan span = new TimeSpan(LocalTime.of(startHour.getSelectedIndex(), startMinute.getSelectedIndex()),
+					     LocalTime.of(endHour.getSelectedIndex(), endMinute.getSelectedIndex()));
+
+		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(),
+					      (int) days.getSelectedItem());
+
+		((Calendar) userCalendars.getSelectedItem()).book(date, span, subject.getText());
+	    } catch (IllegalArgumentException | DateTimeException exception) {
+		showErrorDialog(exception);
+	    }
 	    popUp.dispose();
 	    showCalendar((Calendar) userCalendars.getSelectedItem());
 	}
@@ -260,7 +283,15 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    String calName = calendarName.getText();
-	    Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
+	    try {
+		Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
+		JOptionPane.showOptionDialog(confirm, "Calendar successfully created", "Error", JOptionPane.PLAIN_MESSAGE,
+					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		popUp.dispose();
+	    } catch (IllegalArgumentException exception) {
+		showErrorDialog(exception);
+	    }
+	    popUp.dispose();
 	}
     }
 
@@ -285,6 +316,7 @@ public class CalendarFrame extends JFrame
     final private class ChangeCurrentCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
+	    updateUsers();
 	    createPopUp(new ConfirmChangeCurrentCalendarAction());
 	    popUp.add(users);
 	    showUsersCalendars((User) users.getSelectedItem());

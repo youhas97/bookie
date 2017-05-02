@@ -35,7 +35,7 @@ public class Calendar {
     public void cancelAppointment(Appointment app) {
 	if (appointments.contains(app)) {
 	    appointments.remove(app);
-	} else System.out.println("This appointment is not booked");
+	} else throw new IllegalArgumentException("This appointment is not booked");
     }
 
     private boolean isTimeInSpan(LocalTime time, TimeSpan span) {
@@ -72,8 +72,9 @@ public class Calendar {
 	return false;
     }
 
-    static boolean isExistingCalendar(Calendar cal) {
-	for (User user : User.getExistingUsers()) {
+    public static boolean isExistingCalendar(Calendar cal) {
+	final UserList userList = UserList.getInstance();
+	for (User user : userList.getExistingUsers()) {
 	    if (!user.getCalendars().isEmpty()) {
 		for (Calendar calendar : user.getCalendars()) {
 		    if (cal.name.equals(calendar.name)) {
