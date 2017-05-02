@@ -32,6 +32,12 @@ public class Calendar {
 	appointments.sort(new AppointmentComparator());
     }
 
+    public void cancelBooking(Appointment app) {
+	if (appointments.contains(app)) {
+	    appointments.remove(app);
+	} else System.out.println("This appointment is not booked");
+    }
+
     private boolean isTimeInSpan(LocalTime time, TimeSpan span) {
 	if (time.isAfter(span.getStartTime()) && time.isBefore(span.getEndTime())) {
 	    return true;
