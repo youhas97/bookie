@@ -24,6 +24,8 @@ public class CalendarFrame extends JFrame
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
     private final JPanel timeSpanPanel = new JPanel();
+    private final JButton changeDisplayCalendar = new JButton("Change calendar");
+    private final JButton changeCancelCalendar = new JButton("Change calendar");
 
     private final JTextField calendarName = new JTextField();
     private JLabel appointmentLabel;
@@ -34,6 +36,7 @@ public class CalendarFrame extends JFrame
     private JComboBox<Month> months;
     private JComboBox<User> users = new JComboBox<>();
     private JComboBox<Calendar> userCalendars = new JComboBox<>();
+    private JComboBox<Appointment> appointments = new JComboBox<>();
 
     public CalendarFrame() {
 	super(WINDOW_TITLE);
@@ -45,6 +48,7 @@ public class CalendarFrame extends JFrame
 	final JMenuItem quit = new JMenuItem("Quit");
 	final JMenuItem createCalendar = new JMenuItem("Create calendar");
 	final JMenuItem newUser = new JMenuItem("New user");
+	final JMenuItem cancelAppointment = new JMenuItem("Cancel appointment");
 
 	appointmentLabel = new JLabel();
 	final JScrollPane appointmentScrollPane = new JScrollPane(appointmentLabel);
@@ -81,6 +85,7 @@ public class CalendarFrame extends JFrame
 	menuBar.add(systemMenu);
 
 	fileMenu.add(bookAppointment);
+	fileMenu.add(cancelAppointment);
 	fileMenu.add(createCalendar);
 
 	systemMenu.add(quit);
@@ -112,15 +117,16 @@ public class CalendarFrame extends JFrame
 	    users.addItem(user);
 	}
 
+	changeDisplayCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	bookAppointment.addActionListener(new BookPopupAction());
 	createCalendar.addActionListener(new CreateCalendarPopupAction());
-	final JButton changeCurrentCalendar = new JButton("Change calendar");
-	changeCurrentCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	newUser.addActionListener(new NewUserPopupAction());
+	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
+	changeCancelCalendar.addActionListener(new ChangeCancelCalendarAction());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
-	this.add(changeCurrentCalendar, "cell 0 2");
+	this.add(changeDisplayCalendar, "cell 0 2");
 	this.add(appointmentScrollPane, "cell 0 1, w 550::1000, h 50::500, span 2, grow");
 	this.add(menuBar, "cell 0 0");
 
@@ -167,6 +173,23 @@ public class CalendarFrame extends JFrame
 	confirm.addActionListener(confirmAction);
     }
 
+    final private class CancelAppointmentPopupAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    createPopUp(new ConfirmCancelAppointmentAction());
+	    popUp.add(users);
+	    popUp.add(userCalendars);
+	    showUsersCalendars((User) users.getSelectedItem());
+	    popUp.add(appointments);
+	    popUp.add(changeCancelCalendar);
+
+	    popUp.pack();
+	    popUp.setLocationRelativeTo(popUp.getParent());
+	    popUp.setVisible(true);
+	}
+    }
+
+
     final private class NewUserPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
@@ -197,6 +220,14 @@ public class CalendarFrame extends JFrame
 	    popUp.setVisible(true);
 	}
     }
+
+    final private class ConfirmCancelAppointmentAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    ((Calendar) userCalendars.getSelectedItem()).cancelAppointment(((Appointment) appointments.getSelectedItem()));
+	}
+    }
+
 
     final private class ConfirmNewUserAction implements ActionListener
     {
@@ -240,6 +271,16 @@ public class CalendarFrame extends JFrame
 	    showCalendar((Calendar) userCalendars.getSelectedItem());
 	}
     }
+
+    final private class ChangeCancelCalendarAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    for (Appointment app : ((Calendar) userCalendars.getSelectedItem()).getAppointments()) {
+		appointments.addItem(app);
+	    }
+	}
+    }
+
 
     final private class ChangeCurrentCalendarPopupAction implements ActionListener
     {
