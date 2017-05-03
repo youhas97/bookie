@@ -209,12 +209,13 @@ public class CalendarFrame extends JFrame
 	popUp.setVisible(true);
     }
 
-    private void createPopUp(ActionListener action) {
+    private void createPopUp(ActionListener action, String title) {
 	for (ActionListener listener : confirm.getActionListeners()) {
 	    confirm.removeActionListener(listener);
 	}
 
 	popUp = new JDialog(this, true);
+	popUp.setTitle(title);
 	popUp.setLayout(new MigLayout());
 	essentialPopUpButtons.add(confirm, "west");
 	essentialPopUpButtons.add(cancel, "east");
@@ -231,7 +232,7 @@ public class CalendarFrame extends JFrame
     {
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmChangeCurrentUserAction());
+	    createPopUp(new ConfirmChangeCurrentUserAction(), "Change user");
 	    updateUsers();
 	    popUp.add(users, "span 2");
 	    showPopUp();
@@ -254,7 +255,7 @@ public class CalendarFrame extends JFrame
 	    updateAppointments();
 	    if (currentCal != null) {
 		if (appointments.getItemCount() != 0) {
-		    createPopUp(new ConfirmCancelAppointmentAction());
+		    createPopUp(new ConfirmCancelAppointmentAction(), "Cancel appointment");
 		    updateAppointments();
 		    popUp.add(appointments);
 		    showPopUp();
@@ -273,7 +274,7 @@ public class CalendarFrame extends JFrame
     final private class NewUserPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmNewUserAction());
+	    createPopUp(new ConfirmNewUserAction(), "Create user");
 	    popUp.add(newUserName);
 
 	    showPopUp();
@@ -283,17 +284,23 @@ public class CalendarFrame extends JFrame
     final private class BookPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmBookAction());
-	    popUp.add(days, "cell 0 0");
-	    popUp.add(months, "cell 0 0");
-	    popUp.add(years, "cell 0 0, gapright unrelated");
-	    popUp.add(users);
-	    showCurrentUserCalendars();
-	    popUp.add(userCalendars);
-	    popUp.add(subject);
-	    popUp.add(timeSpanPanel, "south");
+	    if (currentCal != null) {
+		createPopUp(new ConfirmBookAction(), "Book");
+		popUp.add(days, "cell 0 0");
+		popUp.add(months, "cell 0 0");
+		popUp.add(years, "cell 0 0, gapright unrelated");
+		popUp.add(users);
+		showCurrentUserCalendars();
+		popUp.add(userCalendars);
+		popUp.add(subject);
+		popUp.add(timeSpanPanel, "south");
 
-	    showPopUp();
+		showPopUp();
+	    } else {
+		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE,
+					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    }
+
 	}
     }
 
@@ -357,7 +364,7 @@ public class CalendarFrame extends JFrame
 	    try {
 		if (!calendarName.getText().isEmpty()) {
 		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
-		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "Error",
+		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "",
 						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 						 options[0]);
 		    popUp.dispose();
@@ -368,7 +375,6 @@ public class CalendarFrame extends JFrame
 	    } catch (IllegalArgumentException exception) {
 		showErrorDialog(exception);
 	    }
-	    popUp.dispose();
 	}
     }
 
@@ -385,7 +391,7 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    if (currentUser != null) {
-		createPopUp(new ConfirmChangeCurrentCalendarAction());
+		createPopUp(new ConfirmChangeCurrentCalendarAction(), "Change current calendar");
 		showCurrentUserCalendars();
 		popUp.add(userCalendars);
 
@@ -400,7 +406,7 @@ public class CalendarFrame extends JFrame
     final private class CreateCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmCreateCalendarAction());
+	    createPopUp(new ConfirmCreateCalendarAction(), "Create calendar");
 	    popUp.add(users, "cell 0 0");
 	    popUp.add(calendarName, "cell 4 0, w 200");
 

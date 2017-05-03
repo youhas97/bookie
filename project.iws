@@ -65,8 +65,8 @@
       <file leaf-file-name="CalendarFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-738">
-              <caret line="265" column="36" lean-forward="false" selection-start-line="265" selection-start-column="36" selection-end-line="265" selection-end-column="36" />
+            <state relative-caret-position="253">
+              <caret line="408" column="75" lean-forward="false" selection-start-line="408" selection-start-column="75" selection-end-line="408" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -127,9 +127,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hour</find>
-      <find>hours_per</find>
-      <find>after</find>
       <find>isafter</find>
       <find>value</find>
       <find>time</find>
@@ -157,6 +154,9 @@
       <find>show</find>
       <find>showpopup</find>
       <find>cancel</find>
+      <find>createcalend</find>
+      <find>cancelappo</find>
+      <find>createpop</find>
     </findStrings>
     <replaceStrings>
       <replace>name</replace>
@@ -768,7 +768,7 @@
       <workItem from="1493709658559" duration="2109000" />
       <workItem from="1493811460666" duration="3484000" />
       <workItem from="1493816182186" duration="4955000" />
-      <workItem from="1493824153146" duration="43000" />
+      <workItem from="1493824153146" duration="619000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -896,15 +896,22 @@
       <option name="project" value="LOCAL" />
       <updated>1493501913756</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary=".">
+      <created>1493824214871</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1493824214871</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80102000" />
+    <option name="totallyTimeSpent" value="80678000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="0" width="1448" height="746" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -921,7 +928,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15138888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15138888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -964,7 +971,8 @@
     <MESSAGE value="created UserList class which handles and sorts existing users by name" />
     <MESSAGE value="updated notebook.odt" />
     <MESSAGE value="Created AppointmentComparator used to help sort appointments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created AppointmentComparator used to help sort appointments" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1192,8 +1200,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-738">
-          <caret line="265" column="36" lean-forward="false" selection-start-line="265" selection-start-column="36" selection-end-line="265" selection-end-column="36" />
+        <state relative-caret-position="253">
+          <caret line="408" column="75" lean-forward="false" selection-start-line="408" selection-start-column="75" selection-end-line="408" selection-end-column="75" />
           <folding />
         </state>
       </provider>
