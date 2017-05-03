@@ -420,9 +420,8 @@ public class CalendarFrame extends JFrame
     final private class ConfirmCreateCalendarAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    String calName = calendarName.getText();
 	    try {
-		if (!calendarName.getText().isEmpty()) {
+		if (!calendarName.getText().isEmpty() && !calendarName.getText().equals("Calendar name")) {
 		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
 		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "",
 						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
