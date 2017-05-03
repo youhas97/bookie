@@ -14,8 +14,7 @@ public class User {
 	    throw new UnsupportedOperationException("A user with this name already exists");
 	}
 	this.name = name;
-
-	if (password.isEmpty()) this.password = password;
+	if (!password.isEmpty()) this.password = password;
 	else this.password = "";
 
 	existingUsers.addUser(this);
