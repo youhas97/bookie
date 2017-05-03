@@ -292,9 +292,19 @@ public class CalendarFrame extends JFrame
     final private class ConfirmCancelAppointmentAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
-	    popUp.dispose();
-	    showCalendar();
+	    try {
+		if (appointments.getItemCount() != 0) {
+		    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
+		    popUp.dispose();
+		    showCalendar();
+		    JOptionPane.showOptionDialog(confirm, appointments.getSelectedItem() + " has been canceled", "",
+						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+						 options[0]);
+		} else JOptionPane.showOptionDialog(confirm, " No appointment selected", "", JOptionPane.PLAIN_MESSAGE,
+						    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    } catch (UnsupportedOperationException exception) {
+		showErrorDialog(exception);
+	    }
 	}
     }
 
@@ -340,10 +350,16 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    String calName = calendarName.getText();
 	    try {
-		Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
-		JOptionPane.showOptionDialog(confirm, "Calendar successfully created", "Error", JOptionPane.PLAIN_MESSAGE,
-					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		popUp.dispose();
+		if (!calendarName.getText().isEmpty()) {
+		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
+		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "Error",
+						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+						 options[0]);
+		    popUp.dispose();
+		} else {
+		    JOptionPane.showOptionDialog(confirm, "Enter a calendar name", "Error", JOptionPane.PLAIN_MESSAGE,
+						 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		}
 	    } catch (IllegalArgumentException exception) {
 		showErrorDialog(exception);
 	    }
