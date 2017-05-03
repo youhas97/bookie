@@ -5,14 +5,19 @@ import java.util.List;
 
 public class User {
     private String name;
+    private String password;
     private List<Calendar> calendars = new ArrayList<>();
     private UserList existingUsers = new UserList();
 
-    public User(final String name) {
+    public User(final String name, final String password) {
 	if (userExists(name)) {
 	    throw new UnsupportedOperationException("A user with this name already exists");
 	}
 	this.name = name;
+
+	if (password.isEmpty()) this.password = password;
+	else this.password = "";
+
 	existingUsers.addUser(this);
     }
 
@@ -31,6 +36,10 @@ public class User {
 
     public String getName() {
 	return name;
+    }
+
+    public String getPassword() {
+	return password;
     }
 
     @Override public String toString() {

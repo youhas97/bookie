@@ -2,6 +2,8 @@ package bookie;
 
 import net.miginfocom.swing.MigLayout;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,10 +31,13 @@ public class CalendarFrame extends JFrame
     private final JPanel timeSpanPanel = new JPanel();
     private final JButton changeDisplayCalendar = new JButton("Change calendar");
 
-    private final JTextField calendarName = new JTextField();
+    private final JTextField calendarName = new JTextField("Name");
     private JLabel appointmentLabel;
     private JTextField subject = new JTextField("Subject", 7);
     private JTextField newUserName = new JTextField("Name", 7);
+    private JTextField userPassword = new JTextField("(Chars)", 10);
+
+    private JCheckBox userPasswordToggle = new JCheckBox("Add password");
 
     private JComboBox<Integer> days, years, startHour, startMinute, endHour, endMinute;
     private JComboBox<Month> months;
@@ -135,6 +140,11 @@ public class CalendarFrame extends JFrame
 	changeUser.addActionListener(new ChangeCurrentUserAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
 
+	userPassword.addMouseListener(new ClearUserPassword());
+	newUserName.addMouseListener(new ClearNewUserName());
+	calendarName.addMouseListener(new ClearCalendarName());
+	subject.addMouseListener(new ClearSubject());
+
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
 	this.add(changeDisplayCalendar, "cell 0 2");
@@ -148,6 +158,35 @@ public class CalendarFrame extends JFrame
 
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
+
+    final private class ClearNewUserName extends MouseAdapter
+    {
+	@Override public void mouseClicked(MouseEvent e) {
+	    newUserName.setText("");
+	}
+    }
+
+    final private class ClearUserPassword extends MouseAdapter
+    {
+	@Override public void mouseClicked(MouseEvent e) {
+	    userPassword.setText("");
+	}
+    }
+
+    final private class ClearCalendarName extends MouseAdapter
+    {
+	@Override public void mouseClicked(MouseEvent e) {
+	    calendarName.setText("");
+	}
+    }
+
+    final private class ClearSubject extends MouseAdapter
+    {
+	@Override public void mouseClicked(MouseEvent e) {
+	    subject.setText("");
+	}
+    }
+
 
     private void updateCurrentUserLabel() {
 	String currentUserLabel;
@@ -235,6 +274,9 @@ public class CalendarFrame extends JFrame
 	    createPopUp(new ConfirmChangeCurrentUserAction(), "Change user");
 	    updateUsers();
 	    popUp.add(users, "span 2");
+	    popUp.add(userPassword);
+	    userPassword.setText("Password");
+	    userPassword.setVisible(true);
 	    showPopUp();
 	}
     }
@@ -243,7 +285,14 @@ public class CalendarFrame extends JFrame
     {
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    currentUser = (User) users.getSelectedItem();
+	    if (userPassword.getText().isEmpty() || ((User) users.getSelectedItem()).getPassword().isEmpty()) {
+		currentUser = (User) users.getSelectedItem();
+	    } else if (((User) users.getSelectedItem()).getPassword().equals(userPassword.getText())) {
+		currentUser = (User) users.getSelectedItem();
+	    } else {
+		JOptionPane.showOptionDialog(confirm, "Incorrect password, try again", "Error", JOptionPane.PLAIN_MESSAGE,
+					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    }
 	    updateCurrentUserLabel();
 	    popUp.dispose();
 	}
@@ -270,13 +319,26 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-
     final private class NewUserPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp(new ConfirmNewUserAction(), "Create user");
 	    popUp.add(newUserName);
+	    newUserName.setText("Name");
+	    popUp.add(userPasswordToggle);
+	    userPasswordToggle.setSelected(false);
+	    popUp.add(userPassword);
+	    userPassword.setVisible(false);
 
+	    userPasswordToggle.addActionListener(new ActionListener()
+	    {
+		public void actionPerformed(ActionEvent e) {
+		    userPassword.setText("(Chars)");
+		    userPassword.setVisible(userPasswordToggle.isSelected());
+		    invalidate();
+		    validate();
+		}
+	    });
 	    showPopUp();
 	}
     }
@@ -290,6 +352,7 @@ public class CalendarFrame extends JFrame
 		popUp.add(months, "cell 0 0");
 		popUp.add(years, "cell 0 0, gapright unrelated");
 		popUp.add(subject);
+		subject.setText("Subject");
 		popUp.add(timeSpanPanel, "south");
 
 		showPopUp();
@@ -321,13 +384,16 @@ public class CalendarFrame extends JFrame
     final private class ConfirmNewUserAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    String name = newUserName.getText();
 	    try {
-		User user = new User(name);
-		popUp.dispose();
-		JOptionPane
-			.showOptionDialog(confirm, "New user \"" + name + "\"" + " created", "Error", JOptionPane.PLAIN_MESSAGE,
-					  JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if ((userPassword.getText()).isEmpty()) {
+		    User user = new User(newUserName.getText(), "");
+		} else {
+		    User user = new User(newUserName.getText(), userPassword.getText());
+		    popUp.dispose();
+		    JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created", "Error",
+						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+						 options[0]);
+		}
 	    } catch (UnsupportedOperationException exception) {
 		showErrorDialog(exception);
 	    }
@@ -405,6 +471,7 @@ public class CalendarFrame extends JFrame
 	    createPopUp(new ConfirmCreateCalendarAction(), "Create calendar");
 	    popUp.add(users, "cell 0 0");
 	    popUp.add(calendarName, "cell 4 0, w 200");
+	    calendarName.setText("Calendar name");
 
 	    showPopUp();
 	}
