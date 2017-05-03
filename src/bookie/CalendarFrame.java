@@ -40,12 +40,15 @@ public class CalendarFrame extends JFrame
     private JComboBox<Calendar> userCalendars = new JComboBox<>();
     private Object[] options = { "OK" };
     private JComboBox<Appointment> appointments = new JComboBox<>();
-    private Calendar currentCal;
-
+    private Calendar currentCal = null;
+    private User currentUser = null;
+    private JLabel userLabel;
 
     public CalendarFrame() {
 	super(WINDOW_TITLE);
 	cancel.addActionListener(new CancelAction());
+
+	userLabel = new JLabel("Current user: none");
 
 	final JMenuBar menuBar = new JMenuBar();
 
@@ -53,6 +56,7 @@ public class CalendarFrame extends JFrame
 	final JMenuItem quit = new JMenuItem("Quit");
 	final JMenuItem createCalendar = new JMenuItem("Create calendar");
 	final JMenuItem newUser = new JMenuItem("New user");
+	final JMenuItem changeUser = new JMenuItem("Change user");
 	final JMenuItem cancelAppointment = new JMenuItem("Cancel appointment");
 
 	appointmentLabel = new JLabel();
@@ -96,6 +100,7 @@ public class CalendarFrame extends JFrame
 	systemMenu.add(quit);
 
 	userMenu.add(newUser);
+	userMenu.add(changeUser);
 
 	for (Month month : Month.values()) {
 	    months.addItem(month);
@@ -127,6 +132,7 @@ public class CalendarFrame extends JFrame
 	final JButton changeCurrentCalendar = new JButton("Change calendar");
 	changeCurrentCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	newUser.addActionListener(new NewUserPopupAction());
+	changeUser.addActionListener(new ChangeCurrentUserAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
 
 	quit.addActionListener(new QuitAction());
@@ -134,12 +140,23 @@ public class CalendarFrame extends JFrame
 	this.add(changeDisplayCalendar, "cell 0 2");
 	this.add(appointmentScrollPane, "cell 0 1, w 550::1000, h 50::500, span 2, grow");
 	this.add(menuBar, "cell 0 0");
+	this.add(userLabel, "cell 1 0");
 
 	this.pack();
 	this.setLocationRelativeTo(null);
 	this.setVisible(true);
 
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    private void updateCurrentUserLabel() {
+	String currentUserLabel;
+	if (currentUser != null) {
+	    currentUserLabel = currentUser.toString();
+	} else {
+	    currentUserLabel = "none";
+	}
+	userLabel.setText("Current user: " + currentUserLabel);
     }
 
     private void updateUsers() {
@@ -149,8 +166,9 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    private void showUsersCalendars(User user) {
-	for (Calendar cal : user.getCalendars()) {
+    private void showCurrentUserCalendars() {
+	userCalendars.removeAllItems();
+	for (Calendar cal : currentUser.getCalendars()) {
 	    userCalendars.addItem(cal);
 	}
     }
@@ -189,7 +207,7 @@ public class CalendarFrame extends JFrame
 	popUp.setVisible(true);
     }
 
-    private void createPopUp(ActionListener confirmAction) {
+    private void createPopUp(ActionListener action) {
 	for (ActionListener listener : confirm.getActionListeners()) {
 	    confirm.removeActionListener(listener);
 	}
@@ -199,12 +217,33 @@ public class CalendarFrame extends JFrame
 	essentialPopUpButtons.add(confirm, "west");
 	essentialPopUpButtons.add(cancel, "east");
 	popUp.add(essentialPopUpButtons, "south");
-	confirm.addActionListener(confirmAction);
+	confirm.addActionListener(action);
     }
 
     private void showErrorDialog(Exception e) {
 	JOptionPane.showOptionDialog(confirm, e.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE,
 				     null, options, options[0]);
+    }
+
+    final private class ChangeCurrentUserAction implements ActionListener
+    {
+
+	@Override public void actionPerformed(final ActionEvent e) {
+	    createPopUp(new ConfirmChangeCurrentUserAction());
+	    updateUsers();
+	    popUp.add(users, "span 2");
+	    showPopUp();
+	}
+    }
+
+    final private class ConfirmChangeCurrentUserAction implements ActionListener
+    {
+
+	@Override public void actionPerformed(final ActionEvent e) {
+	    currentUser = (User) users.getSelectedItem();
+	    updateCurrentUserLabel();
+	    popUp.dispose();
+	}
     }
 
     final private class CancelAppointmentPopupAction implements ActionListener
@@ -216,7 +255,7 @@ public class CalendarFrame extends JFrame
 		popUp.add(appointments);
 		showPopUp();
 	    } else {
-		JOptionPane.showOptionDialog(confirm, "No calendar selected", "Error", JOptionPane.PLAIN_MESSAGE,
+		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE,
 					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    }
 	}
@@ -241,7 +280,7 @@ public class CalendarFrame extends JFrame
 	    popUp.add(months, "cell 0 0");
 	    popUp.add(years, "cell 0 0, gapright unrelated");
 	    popUp.add(users);
-	    showUsersCalendars((User) users.getSelectedItem());
+	    showCurrentUserCalendars();
 	    popUp.add(userCalendars);
 	    popUp.add(subject);
 	    popUp.add(timeSpanPanel, "south");
@@ -324,13 +363,16 @@ public class CalendarFrame extends JFrame
     final private class ChangeCurrentCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    updateUsers();
-	    createPopUp(new ConfirmChangeCurrentCalendarAction());
-	    popUp.add(users);
-	    showUsersCalendars((User) users.getSelectedItem());
-	    popUp.add(userCalendars);
+	    if (currentUser != null) {
+		createPopUp(new ConfirmChangeCurrentCalendarAction());
+		showCurrentUserCalendars();
+		popUp.add(userCalendars);
 
-	    showPopUp();
+		showPopUp();
+	    } else {
+		JOptionPane.showOptionDialog(confirm, "No user selected!", "Error", JOptionPane.PLAIN_MESSAGE,
+					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    }
 	}
     }
 
