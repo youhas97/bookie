@@ -166,7 +166,7 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    private void showCurrentUserCalendars() {
+    private void updateCurrentUserCalendars() {
 	userCalendars.removeAllItems();
 	for (Calendar cal : currentUser.getCalendars()) {
 	    userCalendars.addItem(cal);
@@ -289,9 +289,6 @@ public class CalendarFrame extends JFrame
 		popUp.add(days, "cell 0 0");
 		popUp.add(months, "cell 0 0");
 		popUp.add(years, "cell 0 0, gapright unrelated");
-		popUp.add(users);
-		showCurrentUserCalendars();
-		popUp.add(userCalendars);
 		popUp.add(subject);
 		popUp.add(timeSpanPanel, "south");
 
@@ -347,12 +344,11 @@ public class CalendarFrame extends JFrame
 		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(),
 					      (int) days.getSelectedItem());
 
-		((Calendar) userCalendars.getSelectedItem()).book(date, span, subject.getText());
+		currentCal.book(date, span, subject.getText());
 	    } catch (IllegalArgumentException | DateTimeException exception) {
 		showErrorDialog(exception);
 	    }
 	    popUp.dispose();
-	    currentCal = (Calendar) userCalendars.getSelectedItem();
 	    showCalendar();
 	}
     }
@@ -392,7 +388,7 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    if (currentUser != null) {
 		createPopUp(new ConfirmChangeCurrentCalendarAction(), "Change current calendar");
-		showCurrentUserCalendars();
+		updateCurrentUserCalendars();
 		popUp.add(userCalendars);
 
 		showPopUp();
