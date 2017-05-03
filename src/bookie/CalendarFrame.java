@@ -128,6 +128,7 @@ public class CalendarFrame extends JFrame
 	changeCurrentCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	newUser.addActionListener(new NewUserPopupAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
+	users.addActionListener(new UpdateTriggerAction());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
@@ -142,6 +143,13 @@ public class CalendarFrame extends JFrame
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
+    final private class UpdateTriggerAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    showUsersCalendars((User) users.getSelectedItem());
+	}
+    }
+
     private void updateUsers() {
 	users.removeAllItems();
 	for (User user : userList.getExistingUsers()) {
@@ -150,6 +158,7 @@ public class CalendarFrame extends JFrame
     }
 
     private void showUsersCalendars(User user) {
+	userCalendars.removeAllItems();
 	for (Calendar cal : user.getCalendars()) {
 	    userCalendars.addItem(cal);
 	}
@@ -221,8 +230,6 @@ public class CalendarFrame extends JFrame
 	    }
 	}
     }
-
-
     final private class NewUserPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
@@ -253,9 +260,19 @@ public class CalendarFrame extends JFrame
     final private class ConfirmCancelAppointmentAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
-	    popUp.dispose();
-	    showCalendar();
+	    try {
+		if (appointments.getItemCount() != 0) {
+		    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
+		    popUp.dispose();
+		    showCalendar();
+		    JOptionPane.showOptionDialog(confirm, appointments.getSelectedItem() + " has been canceled", "",
+						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+						 options[0]);
+		} else JOptionPane.showOptionDialog(confirm, " No appointment selected", "", JOptionPane.PLAIN_MESSAGE,
+						    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    } catch (UnsupportedOperationException exception) {
+		showErrorDialog(exception);
+	    }
 	}
     }
 
@@ -287,28 +304,32 @@ public class CalendarFrame extends JFrame
 					      (int) days.getSelectedItem());
 
 		((Calendar) userCalendars.getSelectedItem()).book(date, span, subject.getText());
+		popUp.dispose();
+		showCalendar();
 	    } catch (IllegalArgumentException | DateTimeException exception) {
 		showErrorDialog(exception);
 	    }
-	    popUp.dispose();
 	    currentCal = (Calendar) userCalendars.getSelectedItem();
-	    showCalendar();
 	}
     }
 
     final private class ConfirmCreateCalendarAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    String calName = calendarName.getText();
 	    try {
-		Calendar cal = new Calendar((User) users.getSelectedItem(), calName);
-		JOptionPane.showOptionDialog(confirm, "Calendar successfully created", "Error", JOptionPane.PLAIN_MESSAGE,
-					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		popUp.dispose();
+		if (!calendarName.getText().isEmpty()) {
+		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
+		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "Error",
+						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+						 options[0]);
+		    popUp.dispose();
+		} else {
+		    JOptionPane.showOptionDialog(confirm, "Enter a calendar name", "Error", JOptionPane.PLAIN_MESSAGE,
+						 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		}
 	    } catch (IllegalArgumentException exception) {
 		showErrorDialog(exception);
 	    }
-	    popUp.dispose();
 	}
     }
 
