@@ -14,7 +14,7 @@ import java.awt.BorderLayout;
 
 public class CalendarFrame extends JFrame
 {
-    UserList userList = UserList.getInstance();
+    private UserList userList = UserList.getInstance();
 
     private static final int HOURS_PER_DAY = 24;
     private static final int MINUTES_PER_HOUR = 60;
@@ -89,6 +89,7 @@ public class CalendarFrame extends JFrame
 	menuBar.add(systemMenu);
 
 	fileMenu.add(bookAppointment);
+	fileMenu.add(cancelAppointment);
 	fileMenu.add(createCalendar);
 
 	systemMenu.add(quit);
@@ -126,6 +127,7 @@ public class CalendarFrame extends JFrame
 	newUser.addActionListener(new NewUserPopupAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
 	changeCancelCalendar.addActionListener(new ChangeCancelCalendarAction());
+	users.addActionListener(new UpdateTriggerAction());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
@@ -140,6 +142,13 @@ public class CalendarFrame extends JFrame
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
+    final private class UpdateTriggerAction implements ActionListener
+    {
+	@Override public void actionPerformed(final ActionEvent e) {
+	    updateUserCalendars((User) users.getSelectedItem());
+	}
+    }
+
     private void updateUsers() {
 	users.removeAllItems();
 	for (User user : userList.getExistingUsers()) {
@@ -147,7 +156,8 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    private void showUsersCalendars(User user) {
+    private void updateUserCalendars(User user) {
+	userCalendars.removeAllItems();
 	for (Calendar cal : user.getCalendars()) {
 	    userCalendars.addItem(cal);
 	}
@@ -194,7 +204,7 @@ public class CalendarFrame extends JFrame
 	    createPopUp(new ConfirmCancelAppointmentAction());
 	    popUp.add(users);
 	    popUp.add(userCalendars);
-	    showUsersCalendars((User) users.getSelectedItem());
+	    updateUserCalendars((User) users.getSelectedItem());
 	    popUp.add(appointments);
 	    popUp.add(changeCancelCalendar);
 
@@ -225,7 +235,7 @@ public class CalendarFrame extends JFrame
 	    popUp.add(months, "cell 0 0");
 	    popUp.add(years, "cell 0 0, gapright unrelated");
 	    popUp.add(users);
-	    showUsersCalendars((User) users.getSelectedItem());
+	    updateUserCalendars((User) users.getSelectedItem());
 	    popUp.add(userCalendars);
 	    popUp.add(subject);
 	    popUp.add(timeSpanPanel, "south");
@@ -269,13 +279,13 @@ public class CalendarFrame extends JFrame
 
 		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(),
 					      (int) days.getSelectedItem());
+		popUp.dispose();
+		showCalendar((Calendar) userCalendars.getSelectedItem());
 
 		((Calendar) userCalendars.getSelectedItem()).book(date, span, subject.getText());
 	    } catch (IllegalArgumentException | DateTimeException exception) {
 		showErrorDialog(exception);
 	    }
-	    popUp.dispose();
-	    showCalendar((Calendar) userCalendars.getSelectedItem());
 	}
     }
 
@@ -319,7 +329,7 @@ public class CalendarFrame extends JFrame
 	    updateUsers();
 	    createPopUp(new ConfirmChangeCurrentCalendarAction());
 	    popUp.add(users);
-	    showUsersCalendars((User) users.getSelectedItem());
+	    updateUserCalendars((User) users.getSelectedItem());
 	    popUp.add(userCalendars);
 
 	    popUp.pack();
