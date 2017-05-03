@@ -28,7 +28,6 @@ public class CalendarFrame extends JFrame
     private final JButton cancel = new JButton("Cancel");
     private final JPanel timeSpanPanel = new JPanel();
     private final JButton changeDisplayCalendar = new JButton("Change calendar");
-    private final JButton changeCancelCalendar = new JButton("Change calendar");
 
     private final JTextField calendarName = new JTextField();
     private JLabel appointmentLabel;
@@ -41,6 +40,8 @@ public class CalendarFrame extends JFrame
     private JComboBox<Calendar> userCalendars = new JComboBox<>();
     private Object[] options = { "OK" };
     private JComboBox<Appointment> appointments = new JComboBox<>();
+    private Calendar currentCal;
+
 
     public CalendarFrame() {
 	super(WINDOW_TITLE);
@@ -119,6 +120,7 @@ public class CalendarFrame extends JFrame
 
 	updateUsers();
 
+	final JButton changeDisplayCalendar = new JButton("Change calendar");
 	changeDisplayCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	bookAppointment.addActionListener(new BookPopupAction());
 	createCalendar.addActionListener(new CreateCalendarPopupAction());
@@ -126,8 +128,6 @@ public class CalendarFrame extends JFrame
 	changeCurrentCalendar.addActionListener(new ChangeCurrentCalendarPopupAction());
 	newUser.addActionListener(new NewUserPopupAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
-	changeCancelCalendar.addActionListener(new ChangeCancelCalendarAction());
-	users.addActionListener(new UpdateTriggerAction());
 
 	quit.addActionListener(new QuitAction());
 	this.setLayout(new MigLayout());
@@ -142,13 +142,6 @@ public class CalendarFrame extends JFrame
 	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
-    final private class UpdateTriggerAction implements ActionListener
-    {
-	@Override public void actionPerformed(final ActionEvent e) {
-	    updateUserCalendars((User) users.getSelectedItem());
-	}
-    }
-
     private void updateUsers() {
 	users.removeAllItems();
 	for (User user : userList.getExistingUsers()) {
@@ -156,28 +149,44 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    private void updateUserCalendars(User user) {
-	userCalendars.removeAllItems();
+    private void showUsersCalendars(User user) {
 	for (Calendar cal : user.getCalendars()) {
 	    userCalendars.addItem(cal);
 	}
     }
 
-    public void showCalendar(Calendar cal) {
+    public void showAppointments() {
+	try {
+	    appointments.removeAllItems();
+	    for (Appointment app : currentCal.getAppointments()) {
+		appointments.addItem(app);
+	    }
+	} catch (IllegalArgumentException e) {
+	    showErrorDialog(e);
+	}
+    }
+
+    public void showCalendar() {
 	StringBuilder buf = new StringBuilder();
 	buf.append("<html>");
-	buf.append(cal.getUser());
+	buf.append(currentCal.getUser());
 	buf.append(", ");
-	buf.append(cal);
+	buf.append(currentCal);
 	buf.append("<br>");
 	buf.append("-------------");
 	buf.append("<br>");
-	for (Appointment app : cal.getAppointments()) {
+	for (Appointment app : currentCal.getAppointments()) {
 	    buf.append(String.valueOf(app));
 	    buf.append("<br>");
 	}
 	buf.append("<html>");
 	appointmentLabel.setText(buf.toString());
+    }
+
+    public void showPopUp() {
+	popUp.pack();
+	popUp.setLocationRelativeTo(popUp.getParent());
+	popUp.setVisible(true);
     }
 
     private void createPopUp(ActionListener confirmAction) {
@@ -202,15 +211,14 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp(new ConfirmCancelAppointmentAction());
-	    popUp.add(users);
-	    popUp.add(userCalendars);
-	    updateUserCalendars((User) users.getSelectedItem());
-	    popUp.add(appointments);
-	    popUp.add(changeCancelCalendar);
-
-	    popUp.pack();
-	    popUp.setLocationRelativeTo(popUp.getParent());
-	    popUp.setVisible(true);
+	    if (currentCal != null) {
+		showAppointments();
+		popUp.add(appointments);
+		showPopUp();
+	    } else {
+		JOptionPane.showOptionDialog(confirm, "No calendar selected", "Error", JOptionPane.PLAIN_MESSAGE,
+					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    }
 	}
     }
 
@@ -221,9 +229,7 @@ public class CalendarFrame extends JFrame
 	    createPopUp(new ConfirmNewUserAction());
 	    popUp.add(newUserName);
 
-	    popUp.pack();
-	    popUp.setLocationRelativeTo(popUp.getParent());
-	    popUp.setVisible(true);
+	    showPopUp();
 	}
     }
 
@@ -235,21 +241,21 @@ public class CalendarFrame extends JFrame
 	    popUp.add(months, "cell 0 0");
 	    popUp.add(years, "cell 0 0, gapright unrelated");
 	    popUp.add(users);
-	    updateUserCalendars((User) users.getSelectedItem());
+	    showUsersCalendars((User) users.getSelectedItem());
 	    popUp.add(userCalendars);
 	    popUp.add(subject);
 	    popUp.add(timeSpanPanel, "south");
 
-	    popUp.pack();
-	    popUp.setLocationRelativeTo(popUp.getParent());
-	    popUp.setVisible(true);
+	    showPopUp();
 	}
     }
 
     final private class ConfirmCancelAppointmentAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    ((Calendar) userCalendars.getSelectedItem()).cancelAppointment(((Appointment) appointments.getSelectedItem()));
+	    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
+	    popUp.dispose();
+	    showCalendar();
 	}
     }
 
@@ -279,13 +285,14 @@ public class CalendarFrame extends JFrame
 
 		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(),
 					      (int) days.getSelectedItem());
-		popUp.dispose();
-		showCalendar((Calendar) userCalendars.getSelectedItem());
 
 		((Calendar) userCalendars.getSelectedItem()).book(date, span, subject.getText());
 	    } catch (IllegalArgumentException | DateTimeException exception) {
 		showErrorDialog(exception);
 	    }
+	    popUp.dispose();
+	    currentCal = (Calendar) userCalendars.getSelectedItem();
+	    showCalendar();
 	}
     }
 
@@ -309,19 +316,10 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    popUp.dispose();
-	    showCalendar((Calendar) userCalendars.getSelectedItem());
+	    currentCal = (Calendar) userCalendars.getSelectedItem();
+	    showCalendar();
 	}
     }
-
-    final private class ChangeCancelCalendarAction implements ActionListener
-    {
-	@Override public void actionPerformed(final ActionEvent e) {
-	    for (Appointment app : ((Calendar) userCalendars.getSelectedItem()).getAppointments()) {
-		appointments.addItem(app);
-	    }
-	}
-    }
-
 
     final private class ChangeCurrentCalendarPopupAction implements ActionListener
     {
@@ -329,12 +327,10 @@ public class CalendarFrame extends JFrame
 	    updateUsers();
 	    createPopUp(new ConfirmChangeCurrentCalendarAction());
 	    popUp.add(users);
-	    updateUserCalendars((User) users.getSelectedItem());
+	    showUsersCalendars((User) users.getSelectedItem());
 	    popUp.add(userCalendars);
 
-	    popUp.pack();
-	    popUp.setLocationRelativeTo(popUp.getParent());
-	    popUp.setVisible(true);
+	    showPopUp();
 	}
     }
 
@@ -345,9 +341,7 @@ public class CalendarFrame extends JFrame
 	    popUp.add(users, "cell 0 0");
 	    popUp.add(calendarName, "cell 4 0, w 200");
 
-	    popUp.pack();
-	    popUp.setLocationRelativeTo(popUp.getParent());
-	    popUp.setVisible(true);
+	    showPopUp();
 	}
     }
 
