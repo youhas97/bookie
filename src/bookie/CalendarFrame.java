@@ -173,14 +173,16 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    public void showAppointments() {
-	try {
-	    appointments.removeAllItems();
-	    for (Appointment app : currentCal.getAppointments()) {
-		appointments.addItem(app);
+    public void updateAppointments() {
+	if (currentCal != null) {
+	    try {
+		appointments.removeAllItems();
+		for (Appointment app : currentCal.getAppointments()) {
+		    appointments.addItem(app);
+		}
+	    } catch (IllegalArgumentException e) {
+		showErrorDialog(e);
 	    }
-	} catch (IllegalArgumentException e) {
-	    showErrorDialog(e);
 	}
     }
 
@@ -249,11 +251,17 @@ public class CalendarFrame extends JFrame
     final private class CancelAppointmentPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmCancelAppointmentAction());
+	    updateAppointments();
 	    if (currentCal != null) {
-		showAppointments();
-		popUp.add(appointments);
-		showPopUp();
+		if (appointments.getItemCount() != 0) {
+		    createPopUp(new ConfirmCancelAppointmentAction());
+		    updateAppointments();
+		    popUp.add(appointments);
+		    showPopUp();
+		} else {
+		    JOptionPane.showOptionDialog(confirm, "User does not have any appointments", "", JOptionPane.PLAIN_MESSAGE,
+						 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		}
 	    } else {
 		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE,
 					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -293,15 +301,12 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    try {
-		if (appointments.getItemCount() != 0) {
-		    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
-		    popUp.dispose();
-		    showCalendar();
-		    JOptionPane.showOptionDialog(confirm, appointments.getSelectedItem() + " has been canceled", "",
-						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
-						 options[0]);
-		} else JOptionPane.showOptionDialog(confirm, " No appointment selected", "", JOptionPane.PLAIN_MESSAGE,
-						    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
+		popUp.dispose();
+		showCalendar();
+		JOptionPane.showOptionDialog(confirm, appointments.getSelectedItem() + " has been canceled", "",
+					     JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+					     options[0]);
 	    } catch (UnsupportedOperationException exception) {
 		showErrorDialog(exception);
 	    }
