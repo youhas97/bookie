@@ -32,6 +32,14 @@ public class UserList
 	existingUsers.sort(new UserComparator());
     }
 
+    public void deleteUser(User user) {
+	if (existingUsers.contains(user)) {
+	    existingUsers.remove(user);
+	} else {
+	    throw new IllegalArgumentException("This user does not exist!");
+	}
+    }
+
     public List<User> getExistingUsers() {
 	return existingUsers;
     }

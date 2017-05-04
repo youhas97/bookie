@@ -28,11 +28,17 @@ public class User {
 
     /**
      * Alternate constructor for the class.
-     *
      * @param name Name of the user
      */
     public User(final String name) {
 	this(name, "");
+    }
+
+
+    public void deleteCalendar(Calendar cal) {
+	if (Calendar.isExistingCalendar(cal)) {
+	    this.calendars.remove(cal);
+	} else throw new IllegalArgumentException("This calendar does not exist!");
     }
 
     public boolean userExists(String name) {
