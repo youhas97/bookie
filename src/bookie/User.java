@@ -13,11 +13,15 @@ public class User {
 	if (userExists(name)) {
 	    throw new UnsupportedOperationException("A user with this name already exists");
 	}
+
+	this.password = password;
 	this.name = name;
-	if (!password.isEmpty()) this.password = password;
-	else this.password = "";
 
 	existingUsers.addUser(this);
+    }
+
+    public User(final String name) {
+	this(name, "");
     }
 
     public boolean userExists(String name) {

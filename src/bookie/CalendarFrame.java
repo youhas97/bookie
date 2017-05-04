@@ -29,15 +29,14 @@ public class CalendarFrame extends JFrame
     private final JButton confirm = new JButton("Confirm");
     private final JButton cancel = new JButton("Cancel");
     private final JPanel timeSpanPanel = new JPanel();
-    private final JButton changeDisplayCalendar = new JButton("Change calendar");
 
     private final JTextField calendarName = new JTextField("Name");
     private JLabel appointmentLabel;
     private JTextField subject = new JTextField("Subject", 7);
     private JTextField newUserName = new JTextField("Name", 7);
-    private JTextField userPassword = new JTextField(10);
+    private JPasswordField userPassword = new JPasswordField(12);
 
-    private JCheckBox userPasswordToggle = new JCheckBox("Add password(Chars)");
+    private JCheckBox userPasswordToggle = new JCheckBox("Password");
 
     private JComboBox<Integer> days, years, startHour, startMinute, endHour, endMinute;
     private JComboBox<Month> months;
@@ -276,12 +275,13 @@ public class CalendarFrame extends JFrame
     final private class ConfirmChangeCurrentUserAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (((User) users.getSelectedItem()).getPassword().isEmpty() ||
-		((User) users.getSelectedItem()).getPassword().equals(userPassword.getText())) {
+	    String password = new String(userPassword.getPassword());
+	    System.out.println("user = " + users.getSelectedItem());
+	    if (((User) users.getSelectedItem()).getPassword().equals(password)) {
 		currentUser = (User) users.getSelectedItem();
 		updateCurrentUserLabel();
 		popUp.dispose();
-		JOptionPane.showOptionDialog(confirm, "Correct password", "", JOptionPane.PLAIN_MESSAGE,
+		JOptionPane.showOptionDialog(confirm, "User has been changed.", "", JOptionPane.PLAIN_MESSAGE,
 					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    } else {
 		JOptionPane.showOptionDialog(confirm, "Incorrect password, try again", "Error", JOptionPane.PLAIN_MESSAGE,
@@ -326,6 +326,7 @@ public class CalendarFrame extends JFrame
 	    {
 		public void actionPerformed(ActionEvent e) {
 		    userPassword.setVisible(userPasswordToggle.isSelected());
+		    userPassword.setText("");
 		    invalidate();
 		    validate();
 		}
@@ -377,20 +378,20 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    try {
 		if (!newUserName.getText().equals("Name")) {
-		    if ((userPassword.getText()).isEmpty()) {
-			User user = new User(newUserName.getText(), "");
+		    if (new String(userPassword.getPassword()).isEmpty()) {
+			User user = new User(newUserName.getText());
 			popUp.dispose();
-			JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created", "",
+			JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created!", "",
 						     JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 						     options[0]);
 		    } else {
-			User user = new User(newUserName.getText(), userPassword.getText());
+			User user = new User(newUserName.getText(), new String(userPassword.getPassword()));
 			popUp.dispose();
-			JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created", "",
+			JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created!", "",
 						     JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 						     options[0]);
 		    }
-		} else JOptionPane.showOptionDialog(confirm, "Enter a name", "Error", JOptionPane.PLAIN_MESSAGE,
+		} else JOptionPane.showOptionDialog(confirm, "Please enter a name!", "Error", JOptionPane.PLAIN_MESSAGE,
 						    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    } catch (UnsupportedOperationException exception) {
 		showErrorDialog(exception);
