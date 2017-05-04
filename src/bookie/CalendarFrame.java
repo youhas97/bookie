@@ -491,11 +491,7 @@ public class CalendarFrame extends JFrame
     {
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (JOptionPane.showConfirmDialog(cancel, "Are you sure you want to cancel?", "WARNING",
-					      JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-		// yes option
-		popUp.dispose();
-	    }
+	    popUp.dispose();
 	}
     }
 }

@@ -6,7 +6,7 @@ import java.time.LocalTime;
 public class Main {
     public static void main(String[] args) {
 
-	User can = new User("Can", "jalla");
+	User can = new User("Can", "yohanna");
 	User hashem = new User("Hashem", "");
 
 	Calendar canHome = new Calendar(can, "Home");
