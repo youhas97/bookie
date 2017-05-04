@@ -25,11 +25,14 @@ public class CalendarFrame extends JFrame
 {
     private UserList userList = UserList.getInstance();
 
+    /*
+    Constants that do not depend on the object
+     */
     private static final int HOURS_PER_DAY = 24;
     private static final int MINUTES_PER_HOUR = 60;
     private static final int MAX_MONTH_DAYS = 31;
-
     private static final String WINDOW_TITLE = "Bookie";
+    private static final int TEXTFIELDSIZE = 12;
 
     private JDialog popUp = null;
     private final JPanel essentialPopUpButtons = new JPanel();
@@ -39,9 +42,9 @@ public class CalendarFrame extends JFrame
 
     private final JTextField calendarName = new JTextField("Name");
     private JLabel appointmentLabel;
-    private JTextField subject = new JTextField("Enter a subject!", 15);
-    private JTextField newUserName = new JTextField("Enter name!", 12);
-    private JPasswordField userPassword = new JPasswordField(12);
+    private JTextField subject = new JTextField("Enter a subject!", TEXTFIELDSIZE);
+    private JTextField newUserName = new JTextField("Enter name!", TEXTFIELDSIZE);
+    private JPasswordField userPassword = new JPasswordField(TEXTFIELDSIZE);
 
     private JCheckBox userPasswordToggle = new JCheckBox("Password");
 
@@ -60,7 +63,20 @@ public class CalendarFrame extends JFrame
 	cancel.addActionListener(new CancelAction());
 
 	userLabel = new JLabel("Current user: none");
+	appointmentLabel = new JLabel();
 
+	months = new JComboBox<>();
+	days = new JComboBox<>();
+	years = new JComboBox<>();
+	startHour = new JComboBox<>();
+	startMinute = new JComboBox<>();
+	endHour = new JComboBox<>();
+	endMinute = new JComboBox<>();
+
+
+    }
+
+    public void run() {
 	final JMenuBar menuBar = new JMenuBar();
 
 	final JMenuItem bookAppointment = new JMenuItem("Book");
@@ -70,20 +86,12 @@ public class CalendarFrame extends JFrame
 	final JMenuItem changeUser = new JMenuItem("Change user");
 	final JMenuItem cancelAppointment = new JMenuItem("Cancel appointment");
 
-	appointmentLabel = new JLabel();
+
 	final JScrollPane appointmentScrollPane = new JScrollPane(appointmentLabel);
 
 	final JMenu fileMenu = new JMenu("File");
 	final JMenu systemMenu = new JMenu("System");
 	final JMenu userMenu = new JMenu("User");
-
-	months = new JComboBox<>();
-	days = new JComboBox<>();
-	years = new JComboBox<>();
-	startHour = new JComboBox<>();
-	startMinute = new JComboBox<>();
-	endHour = new JComboBox<>();
-	endMinute = new JComboBox<>();
 
 	final JPanel startTimePanel = new JPanel();
 	startTimePanel.add(new JLabel("Start Time"), BorderLayout.NORTH);
@@ -134,6 +142,7 @@ public class CalendarFrame extends JFrame
 	    endMinute.addItem(time);
 	}
 
+
 	updateUsers();
 
 	final JButton changeDisplayCalendar = new JButton("Change calendar");
@@ -171,7 +180,7 @@ public class CalendarFrame extends JFrame
 	    @Override public void windowClosing(WindowEvent windowEvent) {
 		if (JOptionPane.showConfirmDialog(frame, "Are you sure to close this window?", "Really Closing?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) ==
 		    JOptionPane.YES_OPTION) {
-		    System.exit(0);
+		    frame.dispose();
 		}
 	    }
 	});
@@ -280,15 +289,20 @@ public class CalendarFrame extends JFrame
 
     final private class ChangeCurrentUserAction implements ActionListener
     {
-
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmChangeCurrentUserAction(), "Change user");
 	    updateUsers();
-	    popUp.add(users, "span 2");
-	    popUp.add(userPassword);
-	    userPassword.setText("");
-	    userPassword.setVisible(true);
-	    showPopUp();
+	    if (users.getItemCount() != 0) {
+		createPopUp(new ConfirmChangeCurrentUserAction(), "Change user");
+		popUp.add(users, "span 2");
+		popUp.add(userPassword);
+		userPassword.setText("");
+		userPassword.setVisible(true);
+		showPopUp();
+
+	    } else {
+		JOptionPane.showOptionDialog(confirm, "No existing users!", "Error", JOptionPane.PLAIN_MESSAGE,
+					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+	    }
 	}
     }
 
@@ -340,7 +354,7 @@ public class CalendarFrame extends JFrame
 
 	    userPasswordToggle.addActionListener(new ActionListener()
 	    {
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent event) {
 		    userPassword.setVisible(userPasswordToggle.isSelected());
 		    userPassword.setText("");
 		    invalidate();
@@ -393,13 +407,15 @@ public class CalendarFrame extends JFrame
 	    try {
 		if (!newUserName.getText().equals("Enter name")) {
 		    if (new String(userPassword.getPassword()).isEmpty()) {
-			User user = new User(newUserName.getText());
+			//Result does not matter, only the initialization is needed.
+			final User user = new User(newUserName.getText());
 			popUp.dispose();
 			JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created!", "",
 						     JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 						     options[0]);
 		    } else {
-			User user = new User(newUserName.getText(), new String(userPassword.getPassword()));
+			//Result does not matter, only the initialization is needed.
+			final User user = new User(newUserName.getText(), new String(userPassword.getPassword()));
 			popUp.dispose();
 			JOptionPane.showOptionDialog(confirm, "New user \"" + newUserName.getText() + "\"" + " created!", "",
 						     JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
@@ -440,6 +456,7 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    try {
 		if (!calendarName.getText().isEmpty() && !calendarName.getText().equals("Calendar name")) {
+		    //Result does not matter, only the initialization is needed.
 		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
 		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 						 options[0]);

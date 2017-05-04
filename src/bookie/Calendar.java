@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class Calendar {
 
+    /*
+    A constant value independent of the object.
+     */
     private static final int MINUTES_PER_HOUR = 60;
 
     private User user;
@@ -75,6 +78,14 @@ public class Calendar {
 	return false;
     }
 
+
+    /**
+     * Checks if a calendar is already existing.
+     *
+     * @param cal Calendar to check for existance.
+     *
+     * @return true if cal does exist, false if it does not.
+     */
     public static boolean isExistingCalendar(Calendar cal) {
 	final UserList userList = UserList.getInstance();
 	for (User user : userList.getExistingUsers()) {
