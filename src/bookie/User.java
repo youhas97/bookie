@@ -13,6 +13,9 @@ public class User {
 	if (userExists(name)) {
 	    throw new UnsupportedOperationException("A user with this name already exists");
 	}
+	if (name.isEmpty()) {
+	    throw new IllegalArgumentException("User must have a name!");
+	}
 
 	this.password = password;
 	this.name = name;

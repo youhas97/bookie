@@ -11,6 +11,9 @@ public class Appointment {
     private String subject;
 
     public Appointment(final LocalDate date, final TimeSpan span, final String subject) {
+	if (subject.isEmpty()) {
+	    throw new IllegalArgumentException("Subject cannot be empty");
+	}
 	this.date = date;
 	this.span = span;
 	this.subject = subject;

@@ -20,4 +20,8 @@ public class UserList
     public List<User> getExistingUsers() {
 	return existingUsers;
     }
+
+    static void setExistingUsers(final List<User> existingUsers) {
+	UserList.existingUsers = existingUsers;
+    }
 }

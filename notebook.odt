@@ -14,3 +14,9 @@ Dilemma 3 (Yousef): Låt User klassen hantera listorna eller skapa en UserList (
 	- User hanterar listan – Listan hanteras direkt där klassen skapas, men inte lika klart var allt görs.
 
 Valde UserList eftersom jag föredrar att ha allt på sin plats och inte två saker på samma plats.
+
+Dilemma 4 (Yousef): Utility class för alla actions eller ha med dom I calendarframe.
+	-Utility class är lättare att se vad som pågår
+	-Calendarframe har inte någon riktig fördel, bara att allt finns på samma ställe.
+
+Valde att behålla allting I Calendarframe eftersom alla actions beror på komponenter i framen

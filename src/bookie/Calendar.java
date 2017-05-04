@@ -1,11 +1,13 @@
 package bookie;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Calendar {
+
     private static final int HOURS_PER_DAY = 24;
     private static final int MINUTES_PER_HOUR = 60;
 

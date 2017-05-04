@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,8 +34,8 @@ public class CalendarFrame extends JFrame
 
     private final JTextField calendarName = new JTextField("Name");
     private JLabel appointmentLabel;
-    private JTextField subject = new JTextField("Subject", 7);
-    private JTextField newUserName = new JTextField("Name", 7);
+    private JTextField subject = new JTextField("Enter a subject!", 15);
+    private JTextField newUserName = new JTextField("Enter name!", 12);
     private JPasswordField userPassword = new JPasswordField(12);
 
     private JCheckBox userPasswordToggle = new JCheckBox("Password");
@@ -154,7 +156,21 @@ public class CalendarFrame extends JFrame
 	this.setLocationRelativeTo(null);
 	this.setVisible(true);
 
-	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+	closeProgram(this);
+    }
+
+    private void closeProgram(JFrame frame) {
+	addWindowListener(new WindowAdapter()
+	{
+	    @Override public void windowClosing(WindowEvent windowEvent) {
+		if (JOptionPane.showConfirmDialog(frame, "Are you sure to close this window?", "Really Closing?",
+						  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) ==
+		    JOptionPane.YES_OPTION) {
+		    System.exit(0);
+		}
+	    }
+	});
     }
 
     final private class ClearNewUserName extends MouseAdapter
@@ -275,9 +291,7 @@ public class CalendarFrame extends JFrame
     final private class ConfirmChangeCurrentUserAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    String password = new String(userPassword.getPassword());
-	    System.out.println("user = " + users.getSelectedItem());
-	    if (((User) users.getSelectedItem()).getPassword().equals(password)) {
+	    if (((User) users.getSelectedItem()).getPassword().equals(new String(userPassword.getPassword()))) {
 		currentUser = (User) users.getSelectedItem();
 		updateCurrentUserLabel();
 		popUp.dispose();
@@ -316,7 +330,7 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    createPopUp(new ConfirmNewUserAction(), "Create user");
 	    popUp.add(newUserName);
-	    newUserName.setText("Name");
+	    newUserName.setText("Enter name");
 	    popUp.add(userPasswordToggle);
 	    userPasswordToggle.setSelected(false);
 	    popUp.add(userPassword);
@@ -344,7 +358,7 @@ public class CalendarFrame extends JFrame
 		popUp.add(months, "cell 0 0");
 		popUp.add(years, "cell 0 0, gapright unrelated");
 		popUp.add(subject);
-		subject.setText("Subject");
+		subject.setText("Enter a subject!");
 		popUp.add(timeSpanPanel, "south");
 
 		showPopUp();
@@ -377,7 +391,7 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    try {
-		if (!newUserName.getText().equals("Name")) {
+		if (!newUserName.getText().equals("Enter name")) {
 		    if (new String(userPassword.getPassword()).isEmpty()) {
 			User user = new User(newUserName.getText());
 			popUp.dispose();
@@ -393,7 +407,7 @@ public class CalendarFrame extends JFrame
 		    }
 		} else JOptionPane.showOptionDialog(confirm, "Please enter a name!", "Error", JOptionPane.PLAIN_MESSAGE,
 						    JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-	    } catch (UnsupportedOperationException exception) {
+	    } catch (UnsupportedOperationException | IllegalArgumentException exception) {
 		showErrorDialog(exception);
 	    }
 	}
@@ -408,12 +422,16 @@ public class CalendarFrame extends JFrame
 
 		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(),
 					      (int) days.getSelectedItem());
-
-		currentCal.book(date, span, subject.getText());
+		if (subject.getText().equals("Enter a subject!")) {
+		    JOptionPane.showOptionDialog(confirm, "Please enter a subject!", "Error", JOptionPane.PLAIN_MESSAGE,
+						 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		} else {
+		    currentCal.book(date, span, subject.getText());
+		    popUp.dispose();
+		}
 	    } catch (IllegalArgumentException | DateTimeException exception) {
 		showErrorDialog(exception);
 	    }
-	    popUp.dispose();
 	    showCalendar();
 	}
     }
