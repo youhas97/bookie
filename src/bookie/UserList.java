@@ -3,8 +3,14 @@ package bookie;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Presents users in form of a list.
+ */
 public class UserList
 {
+    /*
+    existingUsers is static because it is only to be initialized once.
+      */
     private static List<User> existingUsers = new ArrayList<>();
 
     private static final UserList INSTANCE = new UserList();
@@ -19,9 +25,5 @@ public class UserList
 
     public List<User> getExistingUsers() {
 	return existingUsers;
-    }
-
-    static void setExistingUsers(final List<User> existingUsers) {
-	UserList.existingUsers = existingUsers;
     }
 }

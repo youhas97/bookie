@@ -2,6 +2,11 @@ package bookie;
 
 import java.util.Comparator;
 
+/**
+ * Compares two appointments.
+ * Returns a 0, negative or positive integer if the first argument
+ * occurs on the same time, precedes or follows the second argument.
+ */
 public class AppointmentComparator implements Comparator<Appointment>
 {
     @Override public int compare(final Appointment app1, final Appointment app2) {

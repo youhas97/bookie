@@ -2,6 +2,9 @@ package bookie;
 
 import java.time.LocalTime;
 
+/**
+ * Converts two LocalTime objects to one TimeSpan object.
+ */
 public class TimeSpan
 {
     private LocalTime startTime;

@@ -16,6 +16,11 @@ import java.time.Month;
 import java.time.Year;
 import java.awt.BorderLayout;
 
+/**
+ * User interface for the program.
+ * Graphical representation of the program.
+ * Handles everything.
+ */
 public class CalendarFrame extends JFrame
 {
     private UserList userList = UserList.getInstance();
@@ -164,8 +169,7 @@ public class CalendarFrame extends JFrame
 	addWindowListener(new WindowAdapter()
 	{
 	    @Override public void windowClosing(WindowEvent windowEvent) {
-		if (JOptionPane.showConfirmDialog(frame, "Are you sure to close this window?", "Really Closing?",
-						  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) ==
+		if (JOptionPane.showConfirmDialog(frame, "Are you sure to close this window?", "Really Closing?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) ==
 		    JOptionPane.YES_OPTION) {
 		    System.exit(0);
 		}
@@ -295,8 +299,7 @@ public class CalendarFrame extends JFrame
 		currentUser = (User) users.getSelectedItem();
 		updateCurrentUserLabel();
 		popUp.dispose();
-		JOptionPane.showOptionDialog(confirm, "User has been changed.", "", JOptionPane.PLAIN_MESSAGE,
-					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		JOptionPane.showOptionDialog(confirm, "User has been changed.", "", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    } else {
 		JOptionPane.showOptionDialog(confirm, "Incorrect password, try again", "Error", JOptionPane.PLAIN_MESSAGE,
 					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -319,8 +322,7 @@ public class CalendarFrame extends JFrame
 						 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		}
 	    } else {
-		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE,
-					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    }
 	}
     }
@@ -363,8 +365,7 @@ public class CalendarFrame extends JFrame
 
 		showPopUp();
 	    } else {
-		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE,
-					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		JOptionPane.showOptionDialog(confirm, "No calendar selected!", "Error", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    }
 
 	}
@@ -377,8 +378,7 @@ public class CalendarFrame extends JFrame
 		currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
 		popUp.dispose();
 		showCalendar();
-		JOptionPane.showOptionDialog(confirm, appointments.getSelectedItem() + " has been canceled", "",
-					     JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+		JOptionPane.showOptionDialog(confirm, appointments.getSelectedItem() + " has been canceled", "", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 					     options[0]);
 	    } catch (UnsupportedOperationException exception) {
 		showErrorDialog(exception);
@@ -420,8 +420,7 @@ public class CalendarFrame extends JFrame
 		TimeSpan span = new TimeSpan(LocalTime.of(startHour.getSelectedIndex(), startMinute.getSelectedIndex()),
 					     LocalTime.of(endHour.getSelectedIndex(), endMinute.getSelectedIndex()));
 
-		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(),
-					      (int) days.getSelectedItem());
+		LocalDate date = LocalDate.of((int) years.getSelectedItem(), ((Month) months.getSelectedItem()).getValue(), (int) days.getSelectedItem());
 		if (subject.getText().equals("Enter a subject!")) {
 		    JOptionPane.showOptionDialog(confirm, "Please enter a subject!", "Error", JOptionPane.PLAIN_MESSAGE,
 						 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -442,8 +441,7 @@ public class CalendarFrame extends JFrame
 	    try {
 		if (!calendarName.getText().isEmpty() && !calendarName.getText().equals("Calendar name")) {
 		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
-		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "",
-						 JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
+		    JOptionPane.showOptionDialog(confirm, calendarName.getText() + " successfully created", "", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options,
 						 options[0]);
 		    popUp.dispose();
 		} else {
@@ -475,8 +473,7 @@ public class CalendarFrame extends JFrame
 
 		showPopUp();
 	    } else {
-		JOptionPane.showOptionDialog(confirm, "No user selected!", "Error", JOptionPane.PLAIN_MESSAGE,
-					     JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		JOptionPane.showOptionDialog(confirm, "No user selected!", "Error", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 	    }
 	}
     }

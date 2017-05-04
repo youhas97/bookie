@@ -3,6 +3,9 @@ package bookie;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles Functionality and rules for Users.
+ */
 public class User {
     private String name;
     private String password;
@@ -23,6 +26,11 @@ public class User {
 	existingUsers.addUser(this);
     }
 
+    /**
+     * Alternate constructor for the class.
+     *
+     * @param name Name of the user
+     */
     public User(final String name) {
 	this(name, "");
     }
