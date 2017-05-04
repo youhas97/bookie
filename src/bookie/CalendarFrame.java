@@ -60,7 +60,7 @@ public class CalendarFrame extends JFrame
 
     public CalendarFrame() {
 	super(WINDOW_TITLE);
-	cancel.addActionListener(new CancelAction());
+	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 	userLabel = new JLabel("Current user: none");
 	appointmentLabel = new JLabel();
@@ -73,9 +73,11 @@ public class CalendarFrame extends JFrame
 	endHour = new JComboBox<>();
 	endMinute = new JComboBox<>();
 
+	run();
+
     }
 
-    public void run() {
+    private void run() {
 	final JMenuBar menuBar = new JMenuBar();
 
 	final JMenuItem bookAppointment = new JMenuItem("Book");
@@ -85,6 +87,9 @@ public class CalendarFrame extends JFrame
 	final JMenuItem changeUser = new JMenuItem("Change user");
 	final JMenuItem cancelAppointment = new JMenuItem("Cancel appointment");
 	final JMenuItem removeUser = new JMenuItem("Remove current user");
+
+	final JButton deleteCalendar = new JButton("Delete calendar");
+	final JButton changeDisplayCalendar = new JButton("Select calendar");
 
 
 	final JScrollPane appointmentScrollPane = new JScrollPane(appointmentLabel);
@@ -143,15 +148,12 @@ public class CalendarFrame extends JFrame
 	    endMinute.addItem(time);
 	}
 
-
 	showCalendar();
 	updateUsers();
 
-	final JButton changeDisplayCalendar = new JButton("Show different calendar");
-	changeDisplayCalendar.addActionListener(new ShowCalendarPopupAction());
-	final JButton deleteCalendar = new JButton("Delete calendar");
+	changeDisplayCalendar.addActionListener(new SelectCalendarPopupAction());
 	deleteCalendar.addActionListener(new DeleteCalendarAction());
-
+	cancel.addActionListener(new CancelAction());
 	bookAppointment.addActionListener(new BookPopupAction());
 	createCalendar.addActionListener(new CreateCalendarPopupAction());
 	newUser.addActionListener(new NewUserPopupAction());
@@ -176,7 +178,6 @@ public class CalendarFrame extends JFrame
 	this.setLocationRelativeTo(null);
 	this.setVisible(true);
 
-
 	closeProgram(this);
     }
 
@@ -184,9 +185,10 @@ public class CalendarFrame extends JFrame
 	addWindowListener(new WindowAdapter()
 	{
 	    @Override public void windowClosing(WindowEvent windowEvent) {
-		if (JOptionPane.showConfirmDialog(frame, "Are you sure to close this window?", "Really Closing?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) ==
+		if (JOptionPane.showConfirmDialog(frame, "Are you sure to close this window?", "Really Closing?",
+						  JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) ==
 		    JOptionPane.YES_OPTION) {
-		    frame.dispose();
+		    System.exit(0);
 		}
 	    }
 	});
@@ -330,6 +332,7 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    if (currentUser != null) {
 		createPopUp(new ConfirmDeleteUserAction(), "Delete User");
+		popUp.add(new JLabel("Delete user: " + currentUser.getName() + "?"));
 		showPopUp();
 	    } else {
 		showMessage("No user selected!");
@@ -523,43 +526,44 @@ public class CalendarFrame extends JFrame
 	}
     }
 
-    final private class ConfirmShowCalendarAction implements ActionListener
+    final private class ConfirmSelectCalendarAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (userCalendars.getItemCount() != 0) {
 		popUp.dispose();
 		currentCal = (Calendar) userCalendars.getSelectedItem();
 		showCalendar();
-	    } else {
-		showMessage("No existing calendars!");
-	    }
 	}
     }
 
-    final private class ShowCalendarPopupAction implements ActionListener
+    final private class SelectCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (currentUser != null) {
-		createPopUp(new ConfirmShowCalendarAction(), "Change current calendar");
-		updateCurrentUserCalendars();
-		popUp.add(userCalendars);
+	    if (userCalendars.getItemCount() != 0) {
+		if (currentUser != null) {
+		    createPopUp(new ConfirmSelectCalendarAction(), "Select calendar");
+		    updateCurrentUserCalendars();
+		    popUp.add(userCalendars);
 
-		showPopUp();
+		    showPopUp();
+		} else {
+		    showMessage("No user selected!");
+		}
 	    } else {
-		showMessage("No user selected!");
+		showMessage("No existing calendars!");
 	    }
+
 	}
     }
 
     final private class CreateCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    createPopUp(new ConfirmCreateCalendarAction(), "Create calendar");
-	    popUp.add(users, "cell 0 0");
-	    popUp.add(calendarName, "cell 4 0, w 200");
-	    calendarName.setText("Calendar name");
-
-	    showPopUp();
+	    if (currentUser != null) {
+		createPopUp(new ConfirmCreateCalendarAction(), "Create calendar");
+		popUp.add(calendarName, "cell 0 0, w 200, span 4");
+		calendarName.setText("Calendar name");
+		showPopUp();
+	    } else showMessage("No user is selected!");
 	}
     }
 
