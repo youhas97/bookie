@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.iws" afterPath="$PROJECT_DIR$/project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookie/User.java" afterPath="$PROJECT_DIR$/src/bookie/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookie/UserList.java" afterPath="$PROJECT_DIR$/src/bookie/UserList.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -895,7 +893,7 @@
       <workItem from="1493889040363" duration="3059000" />
       <workItem from="1493897063290" duration="5302000" />
       <workItem from="1493902697955" duration="1771000" />
-      <workItem from="1493971998466" duration="806000" />
+      <workItem from="1493971998466" duration="817000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -1086,11 +1084,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493902754124</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added remove user and calendar">
+      <created>1493972814079</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1493972814079</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95965000" />
+    <option name="totallyTimeSpent" value="95976000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="960" height="1175" extended-state="4" />
