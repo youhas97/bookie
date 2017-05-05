@@ -91,7 +91,6 @@ public class CalendarFrame extends JFrame
 	final JButton deleteCalendar = new JButton("Delete calendar");
 	final JButton changeDisplayCalendar = new JButton("Select calendar");
 
-
 	final JScrollPane appointmentScrollPane = new JScrollPane(appointmentLabel);
 
 	final JMenu fileMenu = new JMenu("File");
@@ -160,7 +159,6 @@ public class CalendarFrame extends JFrame
 	changeUser.addActionListener(new ChangeCurrentUserAction());
 	removeUser.addActionListener(new DeleteUserAction());
 	cancelAppointment.addActionListener(new CancelAppointmentPopupAction());
-
 
 	newUserName.addMouseListener(new ClearNewUserName());
 	calendarName.addMouseListener(new ClearCalendarName());
