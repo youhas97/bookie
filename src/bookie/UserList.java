@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Presents users in form of a list.
  */
-public class UserList
+public final class UserList
 {
     /*
     An object is to be added to existingUsers every time a

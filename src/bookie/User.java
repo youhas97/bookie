@@ -37,7 +37,7 @@ public class User {
 
     public void deleteCalendar(Calendar cal) {
 	if (Calendar.isExistingCalendar(cal)) {
-	    this.calendars.remove(cal);
+	    calendars.remove(cal);
 	} else throw new IllegalArgumentException("This calendar does not exist!");
     }
 
