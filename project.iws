@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-3-classes.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-3-classes.uml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-functionality.uml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-overview.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-wholeprogram.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-wholeprogram.uml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/diagram1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/diagram2.png" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram-whole-project.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/diagram-wholeprogram.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.iws" afterPath="$PROJECT_DIR$/project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookie/CalendarFrame.java" afterPath="$PROJECT_DIR$/src/bookie/CalendarFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookie/TimeSpan.java" afterPath="$PROJECT_DIR$/src/bookie/TimeSpan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookie/User.java" afterPath="$PROJECT_DIR$/src/bookie/User.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,10 +20,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Calendar.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Calendar.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bookie/Calendar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
+            <state relative-caret-position="18">
               <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
               <folding />
             </state>
@@ -49,57 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="diagram-overview.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/diagram-overview.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="diagram-3-classes.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/diagram-3-classes.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="diagram-wholeprogram.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/diagram-wholeprogram.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="diagram-wholeprogram.uml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/diagram-wholeprogram.uml">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>bookie</OriginalElement>
-              <nodes>
-                <node x="501.61309523809524" y="344.0">bookie.User</node>
-                <node x="-418.0" y="88.0">bookie.Calendar</node>
-                <node x="-338.7857142857143" y="478.0">bookie.CalendarFrame</node>
-                <node x="101.98214285714289" y="367.0">bookie.Appointment</node>
-              </nodes>
-              <notes />
-              <edges />
-              <settings layout="Hierarchic Group" zoom="1.0" x="71.0" y="188.5" />
-              <SelectedNodes />
-              <Categories>
-                <Category>Methods</Category>
-              </Categories>
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bookie/UserList.java">
+      <file leaf-file-name="Appointment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bookie/Appointment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="360">
+              <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -108,18 +53,38 @@
       <file leaf-file-name="TimeSpan.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookie/TimeSpan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="252">
+              <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalendarFrame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CalendarFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="521" column="17" lean-forward="true" selection-start-line="521" selection-start-column="17" selection-end-line="521" selection-end-column="17" />
+            <state relative-caret-position="9270">
+              <caret line="521" column="17" lean-forward="false" selection-start-line="521" selection-start-column="17" selection-end-line="521" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bookie/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1152">
+              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bookie/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -175,8 +140,8 @@
       <find>password</find>
       <find>J</find>
       <find>showeR</find>
-      <find>Select</find>
       <find>selectCale</find>
+      <find>Select</find>
     </findStrings>
     <replaceStrings>
       <replace>name</replace>
@@ -226,8 +191,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="960" />
-    <option name="height" value="1055" />
+    <option name="x" value="-3" />
+    <option name="width" value="1926" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -247,9 +213,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -282,6 +245,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -798,7 +764,8 @@
       <workItem from="1493902697955" duration="1771000" />
       <workItem from="1493971998466" duration="989000" />
       <workItem from="1493973333094" duration="4602000" />
-      <workItem from="1493983346698" duration="6155000" />
+      <workItem from="1493983346698" duration="7553000" />
+      <workItem from="1493992130763" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -1017,32 +984,38 @@
       <option name="project" value="LOCAL" />
       <updated>1493983497052</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Fixed bugs">
+      <created>1493990653250</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1493990653250</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106905000" />
+    <option name="totallyTimeSpent" value="108326000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="960" height="1055" extended-state="4" />
-    <editor active="true" />
+    <frame x="-3" y="0" width="1926" height="1057" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282588" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22341569" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2368703" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28414097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13927428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1057,6 +1030,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763532" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="842" y="291" width="742" height="722" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1070,7 +1044,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="created most basic classes&#10;" />
     <MESSAGE value="Use existing Date / Time classes" />
     <MESSAGE value="Working on GUI." />
     <MESSAGE value="comepleted GUI essentials and book method" />
@@ -1095,7 +1068,8 @@
     <MESSAGE value="added remove user and calendar" />
     <MESSAGE value="fixed bugs" />
     <MESSAGE value="working on report" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on report" />
+    <MESSAGE value="Fixed bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1224,151 +1198,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3258">
           <caret line="210" column="11" lean-forward="false" selection-start-line="210" selection-start-column="11" selection-end-line="210" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#33804#0" expanded="false" />
-            <element signature="e#6117#6118#0" expanded="false" />
-            <element signature="e#6152#6153#0" expanded="false" />
-            <element signature="e#6436#6437#0" expanded="false" />
-            <element signature="e#6471#6472#0" expanded="false" />
-            <element signature="e#6952#6953#0" expanded="false" />
-            <element signature="e#6993#6994#0" expanded="false" />
-            <element signature="e#7494#7495#0" expanded="false" />
-            <element signature="e#7535#7536#0" expanded="false" />
-            <element signature="e#9111#9112#0" expanded="false" />
-            <element signature="e#9143#9144#0" expanded="false" />
-            <element signature="e#10390#10391#0" expanded="false" />
-            <element signature="e#10476#10477#0" expanded="false" />
-            <element signature="e#10894#10895#0" expanded="false" />
-            <element signature="e#10936#10937#0" expanded="false" />
-            <element signature="e#12826#12827#0" expanded="false" />
-            <element signature="e#12868#12869#0" expanded="false" />
-            <element signature="e#13036#13037#0" expanded="false" />
-            <element signature="e#13066#13067#0" expanded="false" />
-            <element signature="e#15536#15537#0" expanded="false" />
-            <element signature="e#15593#15594#0" expanded="false" />
-            <element signature="e#16377#16378#0" expanded="false" />
-            <element signature="e#16447#16448#0" expanded="false" />
-            <element signature="e#17931#17932#0" expanded="false" />
-            <element signature="e#17969#17970#0" expanded="false" />
-            <element signature="e#21676#21677#0" expanded="false" />
-            <element signature="e#21705#21706#0" expanded="false" />
-            <element signature="e#24784#24785#0" expanded="false" />
-            <element signature="e#24820#24821#0" expanded="false" />
-            <element signature="e#25630#25631#0" expanded="false" />
-            <element signature="e#25711#25712#0" expanded="false" />
-            <element signature="e#25988#25989#0" expanded="false" />
-            <element signature="e#26025#26026#0" expanded="false" />
-            <element signature="e#26631#26632#0" expanded="false" />
-            <element signature="e#26664#26665#0" expanded="false" />
-            <element signature="e#26799#26800#0" expanded="false" />
-            <element signature="e#26843#26844#0" expanded="false" />
-            <element signature="e#27007#27008#0" expanded="false" />
-            <element signature="e#27056#27057#0" expanded="false" />
-            <element signature="e#29144#29145#0" expanded="false" />
-            <element signature="e#29187#29188#0" expanded="false" />
-            <element signature="e#29855#29856#0" expanded="false" />
-            <element signature="e#29888#29889#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/bookie">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>bookie</OriginalElement>
-          <nodes>
-            <node x="" y="">bookie.Calendar</node>
-            <node x="" y="">bookie.User</node>
-            <node x="" y="">bookie.Appointment</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="155.5" y="385.5" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Properties</Category>
-            <Category>Methods</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/Appointment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="37" column="22" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/diagram-3-classes.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diagram-wholeprogram.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diagram-wholeprogram.uml">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>bookie</OriginalElement>
-          <nodes>
-            <node x="501.61309523809524" y="344.0">bookie.User</node>
-            <node x="-418.0" y="88.0">bookie.Calendar</node>
-            <node x="-338.7857142857143" y="478.0">bookie.CalendarFrame</node>
-            <node x="101.98214285714289" y="367.0">bookie.Appointment</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="71.0" y="188.5" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Methods</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/UserComparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/AppointmentComparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="33" lean-forward="false" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/diagram-overview.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -1383,25 +1216,171 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bookie/TimeSpan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        <state relative-caret-position="252">
+          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/Calendar.java">
+    <entry file="file://$PROJECT_DIR$/diagram-wholeprogram.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diagram-overview.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/AppointmentComparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+        <state relative-caret-position="216">
+          <caret line="12" column="33" lean-forward="false" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diagram-wholeprogram.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>bookie</OriginalElement>
+          <nodes>
+            <node x="501.61309523809524" y="344.0">bookie.User</node>
+            <node x="-418.0" y="88.0">bookie.Calendar</node>
+            <node x="-338.7857142857143" y="478.0">bookie.CalendarFrame</node>
+            <node x="101.98214285714289" y="367.0">bookie.Appointment</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="bookie.Calendar" target="bookie.Appointment">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.Calendar" target="bookie.User">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.User" target="bookie.Calendar">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.CalendarFrame" target="bookie.Calendar">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.CalendarFrame" target="bookie.Appointment">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.CalendarFrame" target="bookie.User">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.2000000000000002" x="-341.0" y="275.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="521" column="17" lean-forward="true" selection-start-line="521" selection-start-column="17" selection-end-line="521" selection-end-column="17" />
+        <state relative-caret-position="9270">
+          <caret line="521" column="17" lean-forward="false" selection-start-line="521" selection-start-column="17" selection-end-line="521" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/Calendar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/UserComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/bookie">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>bookie</OriginalElement>
+          <nodes>
+            <node x="509.9999999999998" y="370.0">bookie.User</node>
+            <node x="-309.99999999999966" y="74.66666666666674">bookie.Calendar</node>
+            <node x="-259.9999999999999" y="546.6666666666663">bookie.CalendarFrame</node>
+            <node x="169.00000000000023" y="383.3333333333335">bookie.Appointment</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="bookie.Calendar" target="bookie.Appointment">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.Calendar" target="bookie.User">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.User" target="bookie.Calendar">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.CalendarFrame" target="bookie.Calendar">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.CalendarFrame" target="bookie.Appointment">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="bookie.CalendarFrame" target="bookie.User">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.845360824742268" x="272.0" y="583.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
