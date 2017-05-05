@@ -11,7 +11,7 @@ public class TimeSpan
     private LocalTime endTime;
 
     public TimeSpan(final LocalTime startTime, final LocalTime endTime) {
-	if (startTime.isAfter(endTime)) {
+	if (!startTime.isBefore(endTime)) {
 	    throw new IllegalArgumentException("Start time must preceed end time.");
 	}
 	this.startTime = startTime;

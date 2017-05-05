@@ -41,7 +41,7 @@ public class User {
 	} else throw new IllegalArgumentException("This calendar does not exist!");
     }
 
-    public boolean userExists(String name) {
+    private boolean userExists(String name) {
 	for (User user : existingUsers.getExistingUsers()) {
 	    if (name.equals(user.name)) {
 		return true;

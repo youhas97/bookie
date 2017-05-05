@@ -538,10 +538,10 @@ public class CalendarFrame extends JFrame
     final private class SelectCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
+	    updateCurrentUserCalendars();
 	    if (userCalendars.getItemCount() != 0) {
 		if (currentUser != null) {
 		    createPopUp(new ConfirmSelectCalendarAction(), "Select calendar");
-		    updateCurrentUserCalendars();
 		    popUp.add(userCalendars);
 
 		    showPopUp();
