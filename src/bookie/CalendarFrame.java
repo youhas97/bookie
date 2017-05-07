@@ -233,8 +233,10 @@ public class CalendarFrame extends JFrame
 
     private void updateCurrentUserCalendars() {
 	userCalendars.removeAllItems();
-	for (Calendar cal : currentUser.getCalendars()) {
-	    userCalendars.addItem(cal);
+	if (currentUser != null) {
+	    for (Calendar cal : currentUser.getCalendars()) {
+		userCalendars.addItem(cal);
+	    }
 	}
     }
 
@@ -537,17 +539,17 @@ public class CalendarFrame extends JFrame
     {
 	@Override public void actionPerformed(final ActionEvent e) {
 	    updateCurrentUserCalendars();
-	    if (userCalendars.getItemCount() != 0) {
-		if (currentUser != null) {
+	    if (currentUser != null) {
+		if (userCalendars.getItemCount() != 0) {
 		    createPopUp(new ConfirmSelectCalendarAction(), "Select calendar");
 		    popUp.add(userCalendars);
 
 		    showPopUp();
 		} else {
-		    showMessage("No user selected!");
+		    showMessage("No existing calendars!");
 		}
 	    } else {
-		showMessage("No existing calendars!");
+		showMessage("No user selected!");
 	    }
 
 	}
