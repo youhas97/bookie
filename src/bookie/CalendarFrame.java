@@ -543,7 +543,6 @@ public class CalendarFrame extends JFrame
 		if (userCalendars.getItemCount() != 0) {
 		    createPopUp(new ConfirmSelectCalendarAction(), "Select calendar");
 		    popUp.add(userCalendars);
-
 		    showPopUp();
 		} else {
 		    showMessage("No existing calendars!");
@@ -551,7 +550,6 @@ public class CalendarFrame extends JFrame
 	    } else {
 		showMessage("No user selected!");
 	    }
-
 	}
     }
 
