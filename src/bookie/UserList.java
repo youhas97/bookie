@@ -26,10 +26,21 @@ public final class UserList
      */
     public static UserList getInstance() {return INSTANCE;}
 
+    private UserList() {}
+
     public void addUser(User user) {
 	existingUsers.add(user);
 	//sorts users on the fly.
 	existingUsers.sort(new UserComparator());
+    }
+
+    public static boolean userExists(String name) {
+	for (User user : existingUsers) {
+	    if (name.equals(user.getName())) {
+		return true;
+	    }
+	}
+	return false;
     }
 
     public void deleteUser(User user) {

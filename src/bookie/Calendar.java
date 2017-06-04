@@ -24,8 +24,6 @@ public class Calendar {
 	this.user = user;
 	this.name = name;
 	appointments = new ArrayList<>();
-
-	user.addCalendar(this);
     }
 
     public void book(final LocalDate date, final TimeSpan span, final String subject) {

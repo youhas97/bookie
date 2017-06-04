@@ -240,13 +240,9 @@ public class CalendarFrame extends JFrame
 
     public void updateAppointments() {
 	if (currentCal != null) {
-	    try {
-		appointments.removeAllItems();
-		for (Appointment app : currentCal.getAppointments()) {
-		    appointments.addItem(app);
-		}
-	    } catch (IllegalArgumentException e) {
-		showErrorDialog(e);
+	    appointments.removeAllItems();
+	    for (Appointment app : currentCal.getAppointments()) {
+		appointments.addItem(app);
 	    }
 	}
     }
@@ -449,14 +445,10 @@ public class CalendarFrame extends JFrame
     final private class ConfirmCancelAppointmentAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    try {
-		currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
-		popUp.dispose();
-		showCalendar();
-		showMessage(appointments.getSelectedItem() + " has been canceled");
-	    } catch (UnsupportedOperationException exception) {
-		showErrorDialog(exception);
-	    }
+	    currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
+	    popUp.dispose();
+	    showCalendar();
+	    showMessage(appointments.getSelectedItem() + " has been canceled");
 	}
     }
 
@@ -467,13 +459,13 @@ public class CalendarFrame extends JFrame
 	    try {
 		if (!newUserName.getText().equals("Enter name")) {
 		    if (new String(userPassword.getPassword()).isEmpty()) {
-			//Result does not matter, only the initialization is needed.
 			final User user = new User(newUserName.getText());
+			userList.addUser(user);
 			popUp.dispose();
 			showMessage("New user \"" + newUserName.getText() + "\"" + " created!");
 		    } else {
-			//Result does not matter, only the initialization is needed.
 			final User user = new User(newUserName.getText(), new String(userPassword.getPassword()));
+			userList.addUser(user);
 			popUp.dispose();
 			showMessage("New user \"" + newUserName.getText() + "\"" + " created!");
 		    }
@@ -509,17 +501,13 @@ public class CalendarFrame extends JFrame
     final private class ConfirmCreateCalendarAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    try {
-		if (!calendarName.getText().isEmpty() && !calendarName.getText().equals("Calendar name")) {
-		    //Result does not matter, only the initialization is needed.
-		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
-		    showMessage(calendarName.getText() + " successfully created");
-		    popUp.dispose();
-		} else {
-		    showMessage("Enter a calendar name");
-		}
-	    } catch (IllegalArgumentException exception) {
-		showErrorDialog(exception);
+	    if (!calendarName.getText().isEmpty() && !calendarName.getText().equals("Calendar name")) {
+		Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
+		currentUser.addCalendar(cal);
+		showMessage(calendarName.getText() + " successfully created");
+		popUp.dispose();
+	    } else {
+		showMessage("Enter a calendar name");
 	    }
 	}
     }
@@ -536,18 +524,19 @@ public class CalendarFrame extends JFrame
     final private class SelectCalendarPopupAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    updateCurrentUserCalendars();
-	    if (userCalendars.getItemCount() != 0) {
-		if (currentUser != null) {
+	    if (currentUser != null) {
+		updateCurrentUserCalendars();
+
+		if (userCalendars.getItemCount() != 0) {
 		    createPopUp(new ConfirmSelectCalendarAction(), "Select calendar");
 		    popUp.add(userCalendars);
 
 		    showPopUp();
 		} else {
-		    showMessage("No user selected!");
+		    showMessage("No existing calendars!");
 		}
 	    } else {
-		showMessage("No existing calendars!");
+		showMessage("No user selected!");
 	    }
 
 	}

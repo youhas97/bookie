@@ -10,10 +10,9 @@ public class User {
     private String name;
     private String password;
     private List<Calendar> calendars = new ArrayList<>();
-    private UserList existingUsers = new UserList();
 
     public User(final String name, final String password) {
-	if (userExists(name)) {
+	if (UserList.userExists(name)) {
 	    throw new UnsupportedOperationException("A user with this name already exists");
 	}
 	if (name.isEmpty()) {
@@ -22,8 +21,6 @@ public class User {
 
 	this.password = password;
 	this.name = name;
-
-	existingUsers.addUser(this);
     }
 
     /**
@@ -39,15 +36,6 @@ public class User {
 	if (Calendar.isExistingCalendar(cal)) {
 	    calendars.remove(cal);
 	} else throw new IllegalArgumentException("This calendar does not exist!");
-    }
-
-    private boolean userExists(String name) {
-	for (User user : existingUsers.getExistingUsers()) {
-	    if (name.equals(user.name)) {
-		return true;
-	    }
-	}
-	return false;
     }
 
     public List<Calendar> getCalendars() {
