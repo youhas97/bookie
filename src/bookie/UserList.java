@@ -28,18 +28,20 @@ public final class UserList
 
     private UserList() {}
 
-    public void addUser(User user) {
+    public static void addUser(User user) {
 	existingUsers.add(user);
 	//sorts users on the fly.
 	existingUsers.sort(new UserComparator());
     }
 
-    public static boolean userExists(String name) {
-	for (User user : existingUsers) {
-	    if (name.equals(user.getName())) {
-		return true;
+    public static boolean userExists(User user) {
+	for (User users : existingUsers) {
+	    if (users.getName().equals(user.getName())) {
+		throw new IllegalArgumentException("This user already exist!");
 	    }
 	}
+	System.out.println(existingUsers);
+	System.out.println("Finns inte");
 	return false;
     }
 

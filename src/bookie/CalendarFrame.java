@@ -467,15 +467,22 @@ public class CalendarFrame extends JFrame
 	    try {
 		if (!newUserName.getText().equals("Enter name")) {
 		    if (new String(userPassword.getPassword()).isEmpty()) {
-			//Result does not matter, only the initialization is needed.
+
 			final User user = new User(newUserName.getText());
-			popUp.dispose();
-			showMessage("New user \"" + newUserName.getText() + "\"" + " created!");
+			if (!UserList.userExists(user)) {
+			    UserList.addUser(user);
+			    popUp.dispose();
+			    showMessage("New user \"" + newUserName.getText() + "\"" + " created!");
+			}
+
 		    } else {
-			//Result does not matter, only the initialization is needed.
+
 			final User user = new User(newUserName.getText(), new String(userPassword.getPassword()));
-			popUp.dispose();
-			showMessage("New user \"" + newUserName.getText() + "\"" + " created!");
+			if (!UserList.userExists(user)) {
+			    UserList.addUser(user);
+			    popUp.dispose();
+			    showMessage("New user \"" + newUserName.getText() + "\"" + " created!");
+			}
 		    }
 		} else showMessage("Please enter a name!");
 

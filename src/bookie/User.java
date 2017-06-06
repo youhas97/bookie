@@ -12,9 +12,6 @@ public class User {
     private List<Calendar> calendars = new ArrayList<>();
 
     public User(final String name, final String password) {
-	if (UserList.userExists(name)) {
-	    throw new UnsupportedOperationException("A user with this name already exists");
-	}
 	if (name.isEmpty()) {
 	    throw new IllegalArgumentException("User must have a name!");
 	}
