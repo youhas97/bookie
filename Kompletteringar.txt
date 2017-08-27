@@ -2,3 +2,4 @@ Skrivit om nya typiska egenskaper av Objektorienterad programmering i projektbes
 
 UserList har nu en privat konstruktor så att endast en instans i taget existerar.
 
+Istället för att lägga till User i UserList direkt vid skapandet av en User så skapas det nu en temporär User i CalendarFrame(NewUser) och kollar att alla villkor är uppfyllda innan User:n läggs till i UserList.

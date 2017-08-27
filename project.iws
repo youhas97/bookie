@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="Added completion description.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/youha847-johca907-projektbeskrivning-2017.pdf" />
+    <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kompletteringar.txt" afterPath="$PROJECT_DIR$/Kompletteringar.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.iws" afterPath="$PROJECT_DIR$/project.iws" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,7 +32,7 @@
       <file leaf-file-name="CalendarFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
+            <state relative-caret-position="262">
               <caret line="459" column="66" lean-forward="false" selection-start-line="459" selection-start-column="66" selection-end-line="459" selection-end-column="66" />
               <folding />
             </state>
@@ -43,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/Kompletteringar.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <caret line="4" column="164" lean-forward="false" selection-start-line="4" selection-start-column="164" selection-end-line="4" selection-end-column="164" />
               <folding />
             </state>
           </provider>
@@ -882,7 +882,7 @@
       <workItem from="1493993470461" duration="6000" />
       <workItem from="1496576707639" duration="117000" />
       <workItem from="1503839908825" duration="2361000" />
-      <workItem from="1503844688898" duration="1501000" />
+      <workItem from="1503844688898" duration="1985000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -1143,15 +1143,22 @@
       <option name="project" value="LOCAL" />
       <updated>1503846054491</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Added completion description.">
+      <created>1503846193252</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1503846193252</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113451000" />
+    <option name="totallyTimeSpent" value="113935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="720" y="0" width="720" height="865" extended-state="4" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1167,7 +1174,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29073033" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29073033" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1462,10 +1469,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/bookie/UserList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="459" column="66" lean-forward="false" selection-start-line="459" selection-start-column="66" selection-end-line="459" selection-end-column="66" />
+        <state relative-caret-position="350">
+          <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1478,10 +1485,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/UserList.java">
+    <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        <state relative-caret-position="262">
+          <caret line="459" column="66" lean-forward="false" selection-start-line="459" selection-start-column="66" selection-end-line="459" selection-end-column="66" />
           <folding />
         </state>
       </provider>
@@ -1489,7 +1496,7 @@
     <entry file="file://$PROJECT_DIR$/Kompletteringar.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <caret line="4" column="164" lean-forward="false" selection-start-line="4" selection-start-column="164" selection-end-line="4" selection-end-column="164" />
           <folding />
         </state>
       </provider>
