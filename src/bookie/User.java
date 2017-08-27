@@ -54,6 +54,6 @@ public class User {
     public void addCalendar(Calendar cal) {
 	if (!Calendar.isExistingCalendar(cal)) {
 	    calendars.add(cal);
-	} else throw new IllegalArgumentException("Calendar already exists");
+	} else throw new IllegalArgumentException("A calendar with this name already exists");
     }
 }

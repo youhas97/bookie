@@ -240,14 +240,10 @@ public class CalendarFrame extends JFrame
 
     public void updateAppointments() {
 	if (currentCal != null) {
-	    try {
 		appointments.removeAllItems();
 		for (Appointment app : currentCal.getAppointments()) {
 		    appointments.addItem(app);
 		}
-	    } catch (IllegalArgumentException e) {
-		showErrorDialog(e);
-	    }
 	}
     }
 
@@ -449,14 +445,10 @@ public class CalendarFrame extends JFrame
     final private class ConfirmCancelAppointmentAction implements ActionListener
     {
 	@Override public void actionPerformed(final ActionEvent e) {
-	    try {
 		currentCal.cancelAppointment(((Appointment) appointments.getSelectedItem()));
 		popUp.dispose();
 		showCalendar();
 		showMessage(appointments.getSelectedItem() + " has been canceled");
-	    } catch (UnsupportedOperationException exception) {
-		showErrorDialog(exception);
-	    }
 	}
     }
 
@@ -518,10 +510,15 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 	    try {
 		if (!calendarName.getText().isEmpty() && !calendarName.getText().equals("Calendar name")) {
-		    //Result does not matter, only the initialization is needed.
-		    Calendar cal = new Calendar((User) users.getSelectedItem(), calendarName.getText());
-		    showMessage(calendarName.getText() + " successfully created");
-		    popUp.dispose();
+		    final Calendar cal = new Calendar(currentUser, calendarName.getText());
+		    if (!(currentUser.getCalendars().contains(cal))) {
+			currentUser.addCalendar(cal);
+			showMessage(calendarName.getText() + " successfully created");
+			popUp.dispose();
+		    } //else {
+		    //   showMessage("A calendar with this name already exists");
+		    // }
+
 		} else {
 		    showMessage("Enter a calendar name");
 		}
@@ -545,8 +542,8 @@ public class CalendarFrame extends JFrame
 	@Override public void actionPerformed(final ActionEvent e) {
 
 	    if (currentUser != null) {
+		updateCurrentUserCalendars();
 		if (userCalendars.getItemCount() != 0) {
-		    updateCurrentUserCalendars();
 		    createPopUp(new ConfirmSelectCalendarAction(), "Select calendar");
 		    popUp.add(userCalendars);
 
