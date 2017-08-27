@@ -32,7 +32,7 @@
       <file leaf-file-name="CalendarFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
+            <state relative-caret-position="-701">
               <caret line="459" column="66" lean-forward="false" selection-start-line="459" selection-start-column="66" selection-end-line="459" selection-end-column="66" />
               <folding />
             </state>
@@ -42,8 +42,8 @@
       <file leaf-file-name="Kompletteringar.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Kompletteringar.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="164" lean-forward="false" selection-start-line="4" selection-start-column="164" selection-end-line="4" selection-end-column="164" />
+            <state relative-caret-position="108">
+              <caret line="6" column="192" lean-forward="false" selection-start-line="6" selection-start-column="192" selection-end-line="6" selection-end-column="192" />
               <folding />
             </state>
           </provider>
@@ -65,8 +65,8 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookie/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="477">
+              <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -87,7 +87,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
               <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="e#233#234#0" expanded="false" />
+                <element signature="e#295#296#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -265,6 +268,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="add&#9;PSI&#9;JAVA://bookie.User#addCalendar&#10;calendar cal =&#9;null&#9;null&#10;calendar cal&#9;null&#9;null" />
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
     <UpdatedFiles>
@@ -882,7 +886,7 @@
       <workItem from="1493993470461" duration="6000" />
       <workItem from="1496576707639" duration="117000" />
       <workItem from="1503839908825" duration="2361000" />
-      <workItem from="1503844688898" duration="1985000" />
+      <workItem from="1503844688898" duration="2882000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -1150,11 +1154,32 @@
       <option name="project" value="LOCAL" />
       <updated>1503846193252</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Added completion description.">
+      <created>1503846676134</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1503846676134</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added completion description.">
+      <created>1503847210439</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1503847210439</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Added completion description.">
+      <created>1503847255406</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1503847255406</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113935000" />
+    <option name="totallyTimeSpent" value="114832000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="720" y="0" width="720" height="865" extended-state="4" />
@@ -1403,14 +1428,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bookie/TimeSpan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1446,7 +1463,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#233#234#0" expanded="false" />
+            <element signature="e#295#296#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1469,6 +1489,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookie/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/bookie/UserList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -1477,17 +1513,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookie/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bookie/CalendarFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
+        <state relative-caret-position="-701">
           <caret line="459" column="66" lean-forward="false" selection-start-line="459" selection-start-column="66" selection-end-line="459" selection-end-column="66" />
           <folding />
         </state>
@@ -1495,8 +1523,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Kompletteringar.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="164" lean-forward="false" selection-start-line="4" selection-start-column="164" selection-end-line="4" selection-end-column="164" />
+        <state relative-caret-position="108">
+          <caret line="6" column="192" lean-forward="false" selection-start-line="6" selection-start-column="192" selection-end-line="6" selection-end-column="192" />
           <folding />
         </state>
       </provider>
