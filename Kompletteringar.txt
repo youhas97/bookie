@@ -1,0 +1,4 @@
+Skrivit om nya typiska egenskaper av Objektorienterad programmering i projektbeskrivningen.
+
+UserList har nu en privat konstruktor så att endast en instans i taget existerar.
+
