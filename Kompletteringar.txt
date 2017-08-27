@@ -3,6 +3,9 @@ Skrivit om nya typiska egenskaper av Objektorienterad programmering i projektbes
 UserList har nu en privat konstruktor så att endast en instans i taget existerar.
 
 Istället för att lägga till User i UserList direkt vid skapandet av en User så skapas det nu en temporär User i CalendarFrame(NewUser) och kollar att alla villkor är uppfyllda innan User:n läggs till i UserList.
+
+I ConfirmCreateCalendarAction så skapas nu först en kalender för användaren och sedan läggs den till i användaren. Detta istället för att en kalender skapas och läggs till i användaren direkt i user klassen och därmed förhindra att ett Calendar objekt skapas och inte används.
+
 Samma princip gäller nu för calendar också. När en calendar skapas i CalendarFrame anropas den calendern på ett par funktioner för att kontrollera att villkoren är uppfyllda och sedan läggs den till i användarens lista av calendars.
 
 Tog även bort de onödiga Exception-checkarna i vissa funktioner.
