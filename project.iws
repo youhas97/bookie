@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="Updatet project description.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Kompletteringar.txt" afterPath="$PROJECT_DIR$/Kompletteringar.txt" />
+    <list default="true" id="81c74512-e7d6-4b6f-ba12-53f3652d802d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.iws" afterPath="$PROJECT_DIR$/project.iws" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -882,7 +881,7 @@
       <workItem from="1493993470461" duration="6000" />
       <workItem from="1496576707639" duration="117000" />
       <workItem from="1503839908825" duration="2361000" />
-      <workItem from="1503844688898" duration="1180000" />
+      <workItem from="1503844688898" duration="1363000" />
     </task>
     <task id="LOCAL-00001" summary=":D&#10;">
       <created>1490082293448</created>
@@ -1129,11 +1128,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503844737605</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Added completion description.">
+      <created>1503845917802</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1503845917802</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113130000" />
+    <option name="totallyTimeSpent" value="113313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="720" y="0" width="720" height="865" extended-state="4" />
@@ -1182,7 +1188,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="created combo boxes in calendarframe" />
     <MESSAGE value="Handled time exceptions for booking" />
     <MESSAGE value="Working version before MigLayout." />
     <MESSAGE value="Implemented miglayout." />
@@ -1207,7 +1212,8 @@
     <MESSAGE value="added diagram image" />
     <MESSAGE value="fixed everything but exceptions" />
     <MESSAGE value="Updatet project description." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updatet project description." />
+    <MESSAGE value="Added completion description." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added completion description." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
