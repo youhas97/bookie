@@ -1,4 +1,4 @@
-package bookie;
+package se.liu.ida.dx17.tddd78.bookie.User;
 
 import java.util.Comparator;
 

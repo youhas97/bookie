@@ -1,6 +1,11 @@
-package bookie;
+package se.liu.ida.dx17.tddd78.bookie.GUI;
 
 import net.miginfocom.swing.MigLayout;
+import se.liu.ida.dx17.tddd78.bookie.Calendar.Appointment;
+import se.liu.ida.dx17.tddd78.bookie.Calendar.Calendar;
+import se.liu.ida.dx17.tddd78.bookie.Calendar.TimeSpan;
+import se.liu.ida.dx17.tddd78.bookie.User.User;
+import se.liu.ida.dx17.tddd78.bookie.User.UserList;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -72,12 +77,9 @@ public class CalendarFrame extends JFrame
 	startMinute = new JComboBox<>();
 	endHour = new JComboBox<>();
 	endMinute = new JComboBox<>();
-
-	run();
-
     }
 
-    private void run() {
+    public void run() {
 	final JMenuBar menuBar = new JMenuBar();
 
 	final JMenuItem bookAppointment = new JMenuItem("Book");

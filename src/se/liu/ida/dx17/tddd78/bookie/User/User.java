@@ -1,4 +1,6 @@
-package bookie;
+package se.liu.ida.dx17.tddd78.bookie.User;
+
+import se.liu.ida.dx17.tddd78.bookie.Calendar.Calendar;
 
 import java.util.ArrayList;
 import java.util.List;

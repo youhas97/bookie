@@ -1,4 +1,7 @@
-package bookie;
+package se.liu.ida.dx17.tddd78.bookie.Calendar;
+
+import se.liu.ida.dx17.tddd78.bookie.User.User;
+import se.liu.ida.dx17.tddd78.bookie.User.UserList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
